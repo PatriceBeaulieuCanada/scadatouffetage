@@ -23,7 +23,7 @@ export default function App() {
         window.location.pathname = "/graphview"    
       }     
   return (
-    <div>
+    <div className="app">
       <SidebarComponent id="dockSidebar" ref={dockBar} enableDock={true} dockSize="60px" width="220px" position='Left'>
                          <div className="dock">
                             <ul>
