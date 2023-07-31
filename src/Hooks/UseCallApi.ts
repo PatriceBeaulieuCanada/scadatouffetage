@@ -20,6 +20,22 @@ const UseCallApi=async(param:any) =>{
 		}        
     }
 
+	if(param.action=='GetAllMachine') {
+
+        const params ={
+			stopAction : param.stopAction
+		}
+
+        try {
+			const listMachines = await axios.get('https://localhost:7091/api/Machine/GetAllMachine');		
+			return listMachines.data;
+		} catch (err) {
+			// Handle Error Here
+			console.error(err);
+			return [];
+		}        
+    }
+
 }
 
 export default UseCallApi;
