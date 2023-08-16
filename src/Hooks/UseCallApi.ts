@@ -1,6 +1,10 @@
 import axios, { AxiosResponse } from 'axios';
 const querystring = require('querystring');
 
+//const url = 'https://localhost:7091'
+const url = 'http://129.11.186.20:5005'
+
+
 const UseCallApi=async(param:any) =>{
 
 
@@ -11,7 +15,7 @@ const UseCallApi=async(param:any) =>{
 		}
 
         try {
-			const listHumainStopReason = await axios.get('https://localhost:7091/api/StopReason/Action?'+querystring.stringify(params));		
+			const listHumainStopReason = await axios.get(url+'/api/StopReason/Action?'+querystring.stringify(params));		
 			return listHumainStopReason.data;
 		} catch (err) {
 			// Handle Error Here
@@ -27,7 +31,7 @@ const UseCallApi=async(param:any) =>{
 		}
 
         try {
-			const listMachines = await axios.get('https://localhost:7091/api/Machine/GetAllMachine');		
+			const listMachines = await axios.get(url+'/api/Machine/GetAllMachine');		
 			return listMachines.data;
 		} catch (err) {
 			// Handle Error Here
