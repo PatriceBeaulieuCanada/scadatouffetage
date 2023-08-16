@@ -35,14 +35,14 @@ export default function App() {
                                     <span className="e-icons product"/>
                                     <span className="e-text" title="principale">Principale</span>
                                 </li>
-                                <li className="sidebar-item" onClick={toggleClickInfo}>
+                                {/* <li className="sidebar-item" onClick={toggleClickInfo}>
                                     <span className="e-icons info"/>
                                     <span className="e-text" title="info">Maintenance</span>
                                 </li>
                                 <li className="sidebar-item" onClick={toggleClickGraph}>
                                     <span className="e-icons comment"/>
-                                    <span className="e-text" title="info">Commentaire</span>
-                                </li>                                  
+                                    <span className="e-text" title="info">Commentaire</span> 
+                                </li>    */}                              
                             </ul>
                         </div>
                     </SidebarComponent>

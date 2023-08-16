@@ -231,7 +231,7 @@ span.e-icons {
 
 .mainContainer .mainContainer1{
   /* background-color: blue; */
-  height: 50%;
+  height: 40%;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -258,26 +258,71 @@ span.e-icons {
 .mainContainer .mainContainer2{
   background-color: #f3eeee;
   border-radius: 5px;
-  height: 10%;
-  width: 100%; 
-  text-align: center;
+  height: 15%;
+  width: 100%;  
   display: flex;
-  flex-direction: row;
+  flex-direction:row;
+  text-align: center;  
+}
+
+.container2Div1{
+  display:flex;
+  text-align: center;
   justify-content: center;
-  align-items: center;
+  background-color: #f1f1f1;
+  width: 70%;
+  height: 100%;
+  
 }
 
-.mainContainer2 .item{
+.container2Div2{
+  display:flex;
+  text-align: center;
+  justify-content: center;
+  background-color:#f9f9f9;
+  width: 30%;
+  height: 100%;
+}
+
+.container2Div1 .item{
+  display: flex;
+  flex-direction:row;
   margin-left: 20px;
+  text-align: center;
+  justify-content: center;
+  /* background-color: #ef0a1a; */
+  margin: 5px;
 }
 
-.mainContainer2 label{
+.container2Div1 label{
   font-size: 20px;
+  text-align: center;
 }
 
-.mainContainer2 input{
+.container2Div1 input{
   width: 50px;
   height: 30px;
+  text-align: center;
+}
+
+.container2Div2 .item{
+  display: flex;
+  flex-direction:row;
+  margin-left: 20px;
+  text-align: center;
+  justify-content: center;
+  /* background-color: #ef0a1a; */
+}
+
+.container2Div2 label{
+  font-size: 20px;
+  text-align: center;
+}
+
+.container2Div2 input{
+  width: 50px;
+  height: 30px;
+  text-align: center;
 }
 
 .mainContainer .mainContainer3{
@@ -304,7 +349,6 @@ span.e-icons {
   border: 2px solid black;
   border-radius: 5px;
 }
-
 
 .containerBtnStop{
   background-color: #f3eeee;

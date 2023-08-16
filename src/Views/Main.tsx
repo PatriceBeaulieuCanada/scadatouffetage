@@ -1,7 +1,7 @@
 import { CircularGaugeComponent, AxesDirective, AxisDirective,RangesDirective, RangeDirective, 
     Annotations, AnnotationsDirective, AnnotationDirective,Inject} from '@syncfusion/ej2-react-circulargauge';
 import { useState,useMemo,useEffect} from 'react'
-import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
+import { ButtonComponent, CheckBoxComponent } from '@syncfusion/ej2-react-buttons';
 import { Display } from "react-7-segment-display";
 import UseCallApi from '../Hooks/UseCallApi';
 import PopUp from './PopUp';
@@ -165,46 +165,56 @@ const Main = () =>{
                         {/* div bidon pour séparer les items */}
                     </div>
                 
-                    <div className='item3'>
+                    {/* <div className='item3'>
                         <label style={{fontSize:'25px', textDecoration:'underline', margin:'5px 0px'}}>Compteur (Mètres)</label>
                         <Display value="789" count={3} color='red' backgroundColor='black' height={75} skew={false}/>
-                    </div> 
+                    </div>  */}
                     <PopUpSetup trigger={enablePopupSetup} setTrigger={setEnablePopupSetup} setHandleReturn={handleEnrReturnBtn}
                     setTufterName={setTufterName}/>               
             </div>
 
             <div className='mainContainer2'>
-                <div className='item'>
-                    <label>Placé chariots : </label>
-                    <input/>
+                <div className='container2Div1'>
+                    <div className=''>
+                        <div className='item'>
+                            <label>Placé chariots : </label>
+                            <input/>
+                        </div>
+                        <div className='item'>
+                            <label>Enlevé chariots : </label>
+                            <input/>
+                        </div>
+                        
+                        <div className='item'>
+                            <label>Nbr coller a l'air : </label>
+                            <input/>
+                        </div>
+                    </div>
+                    <div>
+                        <div className='item'>
+                            <label>Nbr coller a la colleuse : </label>
+                            <input/>
+                        </div>
+                        <div className='item'>
+                            <label>Passer les noeuds : </label>
+                            <input/>
+                        </div>
+                        <div className='item'>
+                            <label>28 pouces : </label>
+                            <input/>
+                        </div>
+                    </div>
                 </div>
-                <div className='item'>
-                    <label>Enlevé chariots : </label>
-                    <input/>
-                </div>
-                <div className='item'>
-                    <label>Retour de bobine : </label>
-                    <input/>
-                </div>
-                <div className='item'>
-                    <label>Nbr coller a l'air : </label>
-                    <input/>
-                </div>
-                <div className='item'>
-                    <label>Nbr coller a la colleuse : </label>
-                    <input/>
-                </div>
-                <div className='item'>
-                    <label>Passer les noeuds : </label>
-                    <input/>
-                </div>
-                <div className='item'>
-                    <label>28 pouces : </label>
-                    <input/>
-                </div>
-                <div className='item'>
-                    <ButtonComponent>Enregistré</ButtonComponent>
-                </div>
+                <div className='container2Div2'>
+                    <div className='item'>
+                        <label>Retour de bobine : </label>
+                        <CheckBoxComponent></CheckBoxComponent>
+                    </div>
+                     </div>
+                    <div className='item'>
+                        <ButtonComponent>Enregistré</ButtonComponent>
+                    </div>
+                
             </div>
 
             <div className='mainContainer3'>
