@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 const querystring = require('querystring');
 
-//const url = 'https://localhost:7091'
-const url = 'http://129.11.186.20:5005'
+const url = 'https://localhost:7091'
+//const url = 'http://129.11.186.20:5005'
 
 
 const UseCallApi=async(param:any) =>{
@@ -33,6 +33,18 @@ const UseCallApi=async(param:any) =>{
         try {
 			const listMachines = await axios.get(url+'/api/Machine/GetAllMachine');		
 			return listMachines.data;
+		} catch (err) {
+			// Handle Error Here
+			console.error(err);
+			return [];
+		}        
+    }
+
+	if(param.action=='GetInfoTuffting') {
+
+        try {
+			const listInfoTufter = await axios.get(url+'/api/TufftingStandard/GetInfoTuffting');		
+			return listInfoTufter.data;
 		} catch (err) {
 			// Handle Error Here
 			console.error(err);

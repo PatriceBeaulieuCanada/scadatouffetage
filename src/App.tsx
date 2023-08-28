@@ -24,7 +24,7 @@ export default function App() {
       }     
   return (
     <div className="app">
-      <SidebarComponent id="dockSidebar" ref={dockBar} enableDock={true} dockSize="60px" width="220px" position='Left'>
+      {/* <SidebarComponent id="dockSidebar" ref={dockBar} enableDock={true} dockSize="60px" width="220px" position='Left'>
                          <div className="dock">
                             <ul>
                                 <li className="sidebar-item" id="toggle" onClick={toggleClickMenu}>
@@ -34,18 +34,10 @@ export default function App() {
                                 <li className="sidebar-item" onClick={toggleClickPrincipale}>
                                     <span className="e-icons product"/>
                                     <span className="e-text" title="principale">Principale</span>
-                                </li>
-                                {/* <li className="sidebar-item" onClick={toggleClickInfo}>
-                                    <span className="e-icons info"/>
-                                    <span className="e-text" title="info">Maintenance</span>
-                                </li>
-                                <li className="sidebar-item" onClick={toggleClickGraph}>
-                                    <span className="e-icons comment"/>
-                                    <span className="e-text" title="info">Commentaire</span> 
-                                </li>    */}                              
+                                </li>                
                             </ul>
                         </div>
-                    </SidebarComponent>
+                    </SidebarComponent> */}
         
         <Router>
           <Routes>

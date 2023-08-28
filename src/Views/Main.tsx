@@ -14,6 +14,7 @@ const Main = () =>{
     const[textPopup,setTextPopup] = useState("");
     const [commentTxt,setCommentTxt] = useState('')
     const [tufterName, setTufterName] = useState('')
+    const [tufterInfo, setTufterInfo] = useState([{name:""}])
     const param = { action: '',stopAction:''}
 
     useMemo(() =>{
@@ -31,6 +32,7 @@ const Main = () =>{
             }
         }
         
+        UseCallApi({action:'GetInfoTuffting'}).then((tufterInfo)=>setTufterInfo(tufterInfo))
       },[])
     
     const handleClickAction = async(args:any)=>{
@@ -111,8 +113,10 @@ const Main = () =>{
     }
 
     const handleEnrReturnBtn = () =>{
-        
-        document.cookie = "tufterName="+tufterName;
+        var now = new Date();
+        now.setTime(now.getTime() + 365000 * 3600 * 1000);
+
+        document.cookie = "tufterName="+tufterName+"; expires=" + now.toUTCString() + ";path=/";
 
         if(enablePopupSetup){
             setEnablePopupSetup(false);
@@ -175,46 +179,29 @@ const Main = () =>{
 
             <div className='mainContainer2'>
                 <div className='container2Div1'>
-                    <div className=''>
-                        <div className='item'>
-                            <label>Placé chariots : </label>
+                    <div className='subDiv'>
+                        {tufterInfo.map((v,i)=>{
+                        return(
+                            <div className='item'>
+                            <label>{v.name}  :</label>
                             <input/>
-                        </div>
-                        <div className='item'>
-                            <label>Enlevé chariots : </label>
-                            <input/>
-                        </div>
+                            </div>
+                        )
+                        })}
+                    </div>
+                    {/* <div className='subDiv111'>
                         
                         <div className='item'>
-                            <label>Nbr coller a l'air : </label>
-                            <input/>
+                        <ButtonComponent>Enregistré</ButtonComponent>
                         </div>
-                    </div>
-                    <div>
-                        <div className='item'>
-                            <label>Nbr coller a la colleuse : </label>
-                            <input/>
-                        </div>
-                        <div className='item'>
-                            <label>Passer les noeuds : </label>
-                            <input/>
-                        </div>
-                        <div className='item'>
-                            <label>28 pouces : </label>
-                            <input/>
-                        </div>
-                    </div>
+                    </div> */}
                 </div>
                 <div className='container2Div2'>
-                    <div className='item'>
+                    {/* <div className='item'>
                         <label>Retour de bobine : </label>
                         <CheckBoxComponent></CheckBoxComponent>
-                    </div>
-                     </div>
-                    <div className='item'>
-                        <ButtonComponent>Enregistré</ButtonComponent>
-                    </div>
-                
+                    </div> */}
+                </div>
             </div>
 
             <div className='mainContainer3'>
