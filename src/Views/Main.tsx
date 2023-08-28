@@ -15,6 +15,8 @@ const Main = () =>{
     const [commentTxt,setCommentTxt] = useState('')
     const [tufterName, setTufterName] = useState('')
     const [tufterInfo, setTufterInfo] = useState([{name:""}])
+    const [tufterCheckList1, setTufterCheckList1] = useState([{name:""}])
+    const [tufterCheckList2, setTufterCheckList2] = useState([{name:""}])
     const param = { action: '',stopAction:''}
 
     useMemo(() =>{
@@ -33,6 +35,8 @@ const Main = () =>{
         }
         
         UseCallApi({action:'GetInfoTuffting'}).then((tufterInfo)=>setTufterInfo(tufterInfo))
+        UseCallApi({action:'GetTufterCheckList1'}).then((tufterCheckList1)=>setTufterCheckList1(tufterCheckList1))
+        UseCallApi({action:'GetTufterCheckList2'}).then((tufterCheckList2)=>setTufterCheckList2(tufterCheckList2))
       },[])
     
     const handleClickAction = async(args:any)=>{
@@ -168,6 +172,17 @@ const Main = () =>{
                     <div className='item2'>
                         {/* div bidon pour séparer les items */}
                     </div>
+
+                    <div className='subDiv'>
+                            {tufterCheckList2.map((v,i)=>{
+                            return(
+                                <div className='item'>
+                                <label>{v.name}  :</label>
+                                <CheckBoxComponent/>
+                                </div>
+                            )
+                            })}
+                    </div>
                 
                     {/* <div className='item3'>
                         <label style={{fontSize:'25px', textDecoration:'underline', margin:'5px 0px'}}>Compteur (Mètres)</label>
@@ -189,18 +204,21 @@ const Main = () =>{
                         )
                         })}
                     </div>
-                    {/* <div className='subDiv111'>
-                        
-                        <div className='item'>
-                        <ButtonComponent>Enregistré</ButtonComponent>
-                        </div>
-                    </div> */}
+                    
                 </div>
                 <div className='container2Div2'>
-                    {/* <div className='item'>
-                        <label>Retour de bobine : </label>
-                        <CheckBoxComponent></CheckBoxComponent>
-                    </div> */}
+                    <div className='subDiv'>
+                            {tufterCheckList1.map((v,i)=>{
+                            return(
+                                <div className='item'>
+                                    <label className='item1'>{v.name}  :</label>
+                                    <div className='checkItem'>
+                                        <CheckBoxComponent/>
+                                    </div>
+                                </div>
+                            )
+                            })}
+                    </div>
                 </div>
             </div>
 
