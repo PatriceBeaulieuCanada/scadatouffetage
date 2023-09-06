@@ -239,6 +239,7 @@ span.e-icons {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  
 }
 
 .grid1Speed{
@@ -246,7 +247,6 @@ span.e-icons {
   flex:none;
   height: 275px;
   width: 275px;
-  
 }
 
 .mainContainer1 .item2{
@@ -256,6 +256,23 @@ span.e-icons {
 .mainContainer1 .item3{
   flex:none;
   padding-right: 20px;  
+  border: 2px solid black;
+  border-radius: 3px;
+}
+
+.mainContainer1 .item3 .item{
+  margin: 10px;
+}
+
+.mainContainer1 .item3 .item label{
+  margin-right: 10px;
+}
+
+.mainContainer1 .item3 .lblItem3{
+  font-size: 20px;
+  margin: 10px;
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 /******************************************************************************************/
@@ -291,6 +308,8 @@ span.e-icons {
   width: 100%;
   height: 100%;
   padding: 10px;
+  border: 2px solid black;
+  border-radius: 3px;
 }
 
 .mainContainer2 .container2Div1 .item{
@@ -316,6 +335,7 @@ span.e-icons {
   min-width: 175px;
 }
 
+
 .mainContainer .mainContainer2 .container2Div2{
   display:flex;
   text-align:center;
@@ -325,7 +345,7 @@ span.e-icons {
   height: 100%;
 }
 
-.mainContainer2 .container2Div2 .subDiv{
+.mainContainer .mainContainer2 .container2Div2 .subDiv{
   display:flex;
   flex: auto;
   flex-direction: column;
@@ -335,20 +355,22 @@ span.e-icons {
   width: 100%;
   height: 100%;
   padding: 10px;
+  border: 2px solid black;
+  border-radius: 3px;
 }
 
 .mainContainer2 .container2Div2 .subDiv .item{
-  background-color: #ef0a1a;
+  font-size: 16px;
 }
 
 .mainContainer2 .container2Div2 .subDiv .item .item1{
   /* min-width: 200px; */
-  background-color: #c0c2c5;
+  font-size: 16px;
   margin-right: 0px;
 }
 
 .mainContainer2 .container2Div2 .subDiv .item .checkItem{
-  background-color: #2d323e;
+  height: 20px;
 }
 
 /******************************************************************************************/

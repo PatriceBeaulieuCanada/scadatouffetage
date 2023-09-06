@@ -173,7 +173,10 @@ const Main = () =>{
                         {/* div bidon pour séparer les items */}
                     </div>
 
-                    <div className='subDiv'>
+                    <div className='item3'>
+                            <div>
+                                <label className='lblItem3'>A chaques fin de quart</label>
+                            </div>
                             {tufterCheckList2.map((v,i)=>{
                             return(
                                 <div className='item'>
