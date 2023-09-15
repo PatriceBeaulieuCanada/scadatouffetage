@@ -86,6 +86,49 @@ const UseCallApi=async(param:any) =>{
 		}        
     }
 
+	if(param.action=='AddStopReason') {
+
+		const config = { headers: { 'Content-Type': 'application/json' } };
+		
+		
+		const params ={
+			id : param.humainstopreason.id,
+			tuffter:param.tuffter,
+			action:param.actionTuffter,
+			employee:param.employee
+		}
+		//console.log(params)
+
+        try {
+			const serialReason =axios.post(url+'/api/StopReason/AddStopReason?'+querystring.stringify(params));		
+			return (await serialReason).data;
+		} catch (err) {
+			// Handle Error Here
+			console.error(err);
+			return [];
+		}        
+    }
+
+	if(param.action=='ModifStopReason') {
+
+		const config = { headers: { 'Content-Type': 'application/json' } };
+		//console.log(param)
+		
+		const params ={
+			guid : param.guid,
+			comment : param.comment
+		}
+
+		//console.log(params)
+        try {
+			axios.post(url+'/api/StopReason/ModifStopReason?'+querystring.stringify(params));			
+		} catch (err) {
+			// Handle Error Here
+			console.error(err);
+			return [];
+		}        
+    }	
+
 }
 
 export default UseCallApi;

@@ -13,11 +13,14 @@ const Main = () =>{
     const[enablePopupSetup,setEnablePopupSetup] = useState(false);
     const[textPopup,setTextPopup] = useState("");
     const [commentTxt,setCommentTxt] = useState('')
+    const [serialData,getSerialData] = useState("")
     const [tufterName, setTufterName] = useState('')
     const [tufterInfo, setTufterInfo] = useState([{name:""}])
     const [tufterCheckList1, setTufterCheckList1] = useState([{name:""}])
     const [tufterCheckList2, setTufterCheckList2] = useState([{name:""}])
-    const param = { action: '',stopAction:''}
+    const [tufterAction, setTufterAction] = useState("")
+    const[employee,SetEmployee] = useState("")
+    const param = { action: '',stopAction:'',humainstopreason:{},guid:'',comment:'',tuffter:"",actionTuffter:"",employee:""}
 
     useMemo(() =>{
         let name = "tufterName" + "=";
@@ -41,6 +44,7 @@ const Main = () =>{
     
     const handleClickAction = async(args:any)=>{
         const actions = args.target.textContent
+        setTufterAction(actions)
         var btnProd = document.getElementById("btnProd");
         var btnAttache = document.getElementById("btnAttache");
         var btnDomper = document.getElementById("btnDomper");
@@ -68,13 +72,16 @@ const Main = () =>{
         setDataButton(await UseCallApi(param))
     }
 
-    const handleClickReason = (args:any) =>{
+    const handleClickReason =async (args:any) =>{
         const variable = dataButton.find(v=>v.name==args.target.textContent)
         setTextPopup(args.target.textContent)
 
-        // param.action = 'AddStopReason'
-        // param.humainstopreason = variable as any
-        // getSerialData(await UseCallApi(param))
+        param.action = 'AddStopReason'
+        param.humainstopreason = variable as any
+        param.tuffter = tufterName
+        param.actionTuffter = tufterAction
+        param.employee = employee
+        getSerialData(await UseCallApi(param))
 
         setCommentTxt('')
 
@@ -91,7 +98,7 @@ const Main = () =>{
         }
     }
 
-    const handleReturnBtn = (args:any) =>{
+    const handleReturnBtn = async (args:any) =>{
 
         var containerBtn = document.getElementById("containerBtn");
         containerBtn?.classList.toggle("containerBtnStop1",false);
@@ -104,6 +111,13 @@ const Main = () =>{
         {
             setEnablePopup(true);
         }
+        param.action = 'ModifStopReason'
+
+        if (serialData==null)
+        
+        param.guid = serialData
+        param.comment = commentTxt;
+        await UseCallApi(param)
     }
 
     const handleClickInput = () =>{
@@ -131,6 +145,10 @@ const Main = () =>{
         }
     }
 
+    const handleInputChange = (args:any) =>{
+        SetEmployee(args.target.value)
+    }
+
     return(
         <div className='mainContainer'>
             <div className='mainHeader'>
@@ -138,7 +156,7 @@ const Main = () =>{
                 <h1>Touffeteur</h1>
                 <div>
                     <label className='headerLabel'>Opérateur : </label>
-                    <input className='headerInputName'/>
+                    <input className='headerInputName' value={employee} onChange={handleInputChange}/>
                 </div>
             </div>
             <div className='mainContainer1'>                
