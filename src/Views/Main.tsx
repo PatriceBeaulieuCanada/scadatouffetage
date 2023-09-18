@@ -6,6 +6,9 @@ import { Display } from "react-7-segment-display";
 import UseCallApi from '../Hooks/UseCallApi';
 import PopUp from './PopUp';
 import PopUpSetup from './PopUpSetup';
+import { w3cwebsocket as W3CWebSocket } from 'websocket'
+
+let socketRead = new W3CWebSocket('ws://129.11.185.127:1796/GetVariables')
 
 const Main = () =>{
     const [dataButton,setDataButton] = useState([{name:''}])
@@ -21,6 +24,7 @@ const Main = () =>{
     const [tufterAction, setTufterAction] = useState("")
     const[employee,SetEmployee] = useState("")
     const param = { action: '',stopAction:'',humainstopreason:{},guid:'',comment:'',tuffter:"",actionTuffter:"",employee:""}
+    const [data, setData] = useState([{Name:"erreur",Value:""}]) 
 
     useMemo(() =>{
         let name = "tufterName" + "=";
@@ -41,6 +45,43 @@ const Main = () =>{
         UseCallApi({action:'GetTufterCheckList1'}).then((tufterCheckList1)=>setTufterCheckList1(tufterCheckList1))
         UseCallApi({action:'GetTufterCheckList2'}).then((tufterCheckList2)=>setTufterCheckList2(tufterCheckList2))
       },[])
+
+      useEffect(() => {
+        const interval = setInterval(() => {
+  
+          var state = socketRead.readyState
+        
+        if(state == 1){
+          console.log("connecter et fonctionnelle")
+          try{
+          socketRead.send("ready");
+        }catch(e)
+        {
+          console.log("erreur",e)
+        }
+  
+        try{
+            socketRead.onmessage = function(e){
+            setData(JSON.parse(e.data.toString()))}
+          }catch(e){
+            console.log("probleme",e)
+          }
+  
+        }
+  
+        if(state == 3){
+          console.log("non connecter ou en erreur",state)
+          socketRead = new W3CWebSocket('ws://129.11.185.127:1796/GetVariables')
+          
+        }
+  
+        if(state == 0){
+          console.log("esaie de connection",state)
+        }
+  
+        }, 2000);
+        return () => clearInterval(interval);
+    }, []); 
     
     const handleClickAction = async(args:any)=>{
         const actions = args.target.textContent
@@ -203,6 +244,9 @@ const Main = () =>{
                                 </div>
                             )
                             })}
+                            <div className='btnItem3'>
+                                <ButtonComponent>Validez</ButtonComponent>
+                            </div>
                     </div>
                 
                     {/* <div className='item3'>
@@ -224,8 +268,10 @@ const Main = () =>{
                             </div>
                         )
                         })}
+                    <div className='container2Div1Btn'>
+                        <ButtonComponent>Validez</ButtonComponent>                            
                     </div>
-                    
+                </div>                                        
                 </div>
                 <div className='container2Div2'>
                     <div className='subDiv'>
@@ -239,6 +285,9 @@ const Main = () =>{
                                 </div>
                             )
                             })}
+                    <div className='container2Div3'>
+                        <ButtonComponent>Validez</ButtonComponent>                            
+                    </div>
                     </div>
                 </div>
             </div>

@@ -275,6 +275,10 @@ span.e-icons {
   text-decoration: underline;
 }
 
+.mainContainer1 .item3 .btnItem3{
+  margin: 10px;
+}
+
 /******************************************************************************************/
 
 .mainContainer .mainContainer2{
@@ -335,6 +339,10 @@ span.e-icons {
   min-width: 175px;
 }
 
+.mainContainer2 .container2Div1Btn{
+  margin: 10px 0px;
+}
+
 
 .mainContainer .mainContainer2 .container2Div2{
   display:flex;
@@ -371,6 +379,10 @@ span.e-icons {
 
 .mainContainer2 .container2Div2 .subDiv .item .checkItem{
   height: 20px;
+}
+
+.mainContainer2 .container2Div3{
+  margin: 15px 0px;
 }
 
 /******************************************************************************************/
