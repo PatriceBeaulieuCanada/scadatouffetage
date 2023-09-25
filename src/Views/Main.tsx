@@ -8,7 +8,7 @@ import PopUp from './PopUp';
 import PopUpSetup from './PopUpSetup';
 import { w3cwebsocket as W3CWebSocket } from 'websocket'
 
-let socketRead = new W3CWebSocket('ws://129.11.185.127:1796/GetVariables')
+let socketRead = new W3CWebSocket('ws://localhost:1796/GetVariables')
 
 const Main = () =>{
     const [dataButton,setDataButton] = useState([{name:''}])
@@ -40,6 +40,22 @@ const Main = () =>{
             setTufterName(c.substring(name.length, c.length))
             }
         }
+
+        let empName = "employeeName" + "=";
+        let decodedEmpCookie = decodeURIComponent(document.cookie);
+        let caEmp = decodedEmpCookie.split(';');
+        for(let i = 0; i <caEmp.length; i++) {
+            let c = caEmp[i];
+            while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+            }
+            if (c.indexOf(empName) == 0) {
+            //console.log(c.substring(name.length, c.length))
+            SetEmployee(c.substring(empName.length, c.length))
+            }
+        }
+
+
         
         UseCallApi({action:'GetInfoTuffting'}).then((tufterInfo)=>setTufterInfo(tufterInfo))
         UseCallApi({action:'GetTufterCheckList1'}).then((tufterCheckList1)=>setTufterCheckList1(tufterCheckList1))
@@ -70,16 +86,15 @@ const Main = () =>{
         }
   
         if(state == 3){
-          console.log("non connecter ou en erreur",state)
-          socketRead = new W3CWebSocket('ws://129.11.185.127:1796/GetVariables')
-          
+          //console.log("non connecter ou en erreur",state)
+          socketRead = new W3CWebSocket('ws://localhost:1796/GetVariables')
         }
   
         if(state == 0){
-          console.log("esaie de connection",state)
+          //console.log("esaie de connection",state)
         }
   
-        }, 2000);
+        }, 6000000);
         return () => clearInterval(interval);
     }, []); 
     
@@ -187,7 +202,21 @@ const Main = () =>{
     }
 
     const handleInputChange = (args:any) =>{
+
         SetEmployee(args.target.value)
+        var now = new Date();
+        now.setTime(now.getTime() + 365000 * 3600 * 1000);
+
+        document.cookie = "employeeName="+employee+"; expires=" + now.toUTCString() + ";path=/";
+    }
+
+    const handleInputBlur = (args:any) =>{
+
+        SetEmployee(args.target.value)
+        var now = new Date();
+        now.setTime(now.getTime() + 365000 * 3600 * 1000);
+
+        document.cookie = "employeeName="+employee+"; expires=" + now.toUTCString() + ";path=/";
     }
 
     return(
@@ -197,7 +226,7 @@ const Main = () =>{
                 <h1>Touffeteur</h1>
                 <div>
                     <label className='headerLabel'>Opérateur : </label>
-                    <input className='headerInputName' value={employee} onChange={handleInputChange}/>
+                    <input className='headerInputName' value={employee} onChange={handleInputChange} onBlur={handleInputBlur}/>
                 </div>
             </div>
             <div className='mainContainer1'>                
