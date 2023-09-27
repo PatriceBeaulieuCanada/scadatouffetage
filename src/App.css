@@ -18,7 +18,18 @@ html,body{
   padding: 1px 5px
 }
 
-@import url("https://cdn.syncfusion.com/ej2/material.css");
+@import "../node_modules/@syncfusion/ej2-base/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-react-navigations/styles/material.css";
+@import '../node_modules/@syncfusion/ej2-base/styles/material.css';  
+@import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';  
+@import '../node_modules/@syncfusion/ej2-dropdowns/styles/material.css';  
+@import '../node_modules/@syncfusion/ej2-inputs/styles/material.css';  
+@import '../node_modules/@syncfusion/ej2-navigations/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css';
+
+
+/* @import url("https://cdn.syncfusion.com/ej2/material.css");
 @import url("https://cdn.syncfusion/ej2-buttons/styles/material.css");
 @import url("https://cdn.syncfusion/ej2-calendars/styles/material.css");
 @import url("https://cdn.syncfusion/ej2-dropdowns/styles/material.css");
@@ -30,7 +41,7 @@ html,body{
 @import url("https://cdn.syncfusion/ej2-navigations/styles/material.css");
 @import url("https://cdn.syncfusion/ej2-popups/styles/material.css");
 @import url("https://cdn.syncfusion/ej2-richtexteditor/styles/material.css");
-@import url("https://cdn.syncfusion/ej2-treegrid/styles/material.css");
+@import url("https://cdn.syncfusion/ej2-treegrid/styles/material.css"); */
 
 /* @import "../node_modules/@syncfusion/ej2-react-grids/styles/material.css"; */
 
