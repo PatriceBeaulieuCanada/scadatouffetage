@@ -18,9 +18,9 @@ const Main = () =>{
     const [commentTxt,setCommentTxt] = useState('')
     const [serialData,getSerialData] = useState("")
     const [tufterName, setTufterName] = useState('')
-    const [tufterInfo, setTufterInfo] = useState([{name:""}])
-    const [tufterCheckList1, setTufterCheckList1] = useState([{name:""}])
-    const [tufterCheckList2, setTufterCheckList2] = useState([{name:""}])
+    const [tufterInfo, setTufterInfo] = useState([{name:"",value:''}])
+    const [tufterCheckList1, setTufterCheckList1] = useState([{name:"",value:''}])
+    const [tufterCheckList2, setTufterCheckList2] = useState([{name:"",value:''}])
     const [tufterAction, setTufterAction] = useState("")
     const[employee,SetEmployee] = useState("")
     const param = { action: '',stopAction:'',humainstopreason:{},guid:'',comment:'',tuffter:"",actionTuffter:"",employee:""}
@@ -168,11 +168,13 @@ const Main = () =>{
             setEnablePopup(true);
         }
         param.action = 'ModifStopReason'
-
-        if (serialData==null)
         
+        console.log("serial : ", serialData)
+
         param.guid = serialData
         param.comment = commentTxt;
+
+        console.log("param : ", param)
         await UseCallApi(param)
     }
 
@@ -217,6 +219,46 @@ const Main = () =>{
         now.setTime(now.getTime() + 365000 * 3600 * 1000);
 
         document.cookie = "employeeName="+employee+"; expires=" + now.toUTCString() + ";path=/";
+    }
+
+
+    const handleClickBtnProd = ()=>{
+        tufterInfo.map((v,i)=>{
+            console.log(v.name,v.value)
+            })
+    }
+
+    const handleInputTufInfo = (args:any) =>{
+        console.log(args.target.id,args.target.value)
+
+        var tufInfo:any = tufterInfo.find(v=>v.name === args.target.id)
+        tufInfo.value = args.target.value
+
+        setTufterInfo(tufterInfo)
+
+        console.log("voici le touver", tufInfo)
+    }
+
+    const handleClickBtnCheck1 = () =>{
+        tufterCheckList1.map((v,i)=>{
+            const checklist= document.getElementById(v.name)
+            console.log(checklist)
+            })
+    }
+
+    const handleCheck1Click = (args:any) =>{
+        console.log(args.target.id,args.target.checked)
+        
+
+    }
+
+    const handleClickBtnCheck2 = () =>{
+
+    }
+
+    const handleCheck2Click = (args:any) =>{
+        console.log(args)
+
     }
 
     return(
@@ -269,12 +311,12 @@ const Main = () =>{
                             return(
                                 <div className='item'>
                                 <label>{v.name}  :</label>
-                                <CheckBoxComponent/>
+                                <CheckBoxComponent id={v.name} onClick={handleCheck2Click}/>
                                 </div>
                             )
                             })}
                             <div className='btnItem3'>
-                                <ButtonComponent>Validez</ButtonComponent>
+                                <ButtonComponent onClick={handleClickBtnCheck2}>Validez</ButtonComponent>
                             </div>
                     </div>
                 
@@ -293,12 +335,12 @@ const Main = () =>{
                         return(
                             <div className='item'>
                             <label>{v.name}  :</label>
-                            <input/>
+                            <input id={v.name} value={v.value} onBlur={handleInputTufInfo}/>
                             </div>
                         )
                         })}
                     <div className='container2Div1Btn'>
-                        <ButtonComponent>Validez</ButtonComponent>                            
+                        <ButtonComponent onClick={handleClickBtnProd}>Validez</ButtonComponent>                            
                     </div>
                 </div>                                        
                 </div>
@@ -309,13 +351,13 @@ const Main = () =>{
                                 <div className='item'>
                                     <label className='item1'>{v.name}  :</label>
                                     <div className='checkItem'>
-                                        <CheckBoxComponent/>
+                                        <CheckBoxComponent id={v.name} onClick={handleCheck1Click}/>
                                     </div>
                                 </div>
                             )
                             })}
                     <div className='container2Div3'>
-                        <ButtonComponent>Validez</ButtonComponent>                            
+                        <ButtonComponent onClick={handleClickBtnCheck1}>Validez</ButtonComponent>                            
                     </div>
                     </div>
                 </div>
