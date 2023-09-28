@@ -7,6 +7,10 @@ import UseCallApi from '../Hooks/UseCallApi';
 import PopUp from './PopUp';
 import PopUpSetup from './PopUpSetup';
 import { w3cwebsocket as W3CWebSocket } from 'websocket'
+import { AxisModel, ChartComponent, SeriesCollectionDirective, SeriesDirective,ChartTheme,LegendSettingsModel,TooltipSettingsModel,ParetoSeries,ColumnSeries,LineSeries,
+    Legend, Category, Tooltip, Highlight, DataLabel
+} from '@syncfusion/ej2-react-charts';
+import { Browser } from '@syncfusion/ej2-base';
 
 let socketRead = new W3CWebSocket('ws://localhost:1796/GetVariables')
 
@@ -54,8 +58,6 @@ const Main = () =>{
             SetEmployee(c.substring(empName.length, c.length))
             }
         }
-
-
         
         UseCallApi({action:'GetInfoTuffting'}).then((tufterInfo)=>setTufterInfo(tufterInfo))
         UseCallApi({action:'GetTufterCheckList1'}).then((tufterCheckList1)=>setTufterCheckList1(tufterCheckList1))
@@ -82,7 +84,6 @@ const Main = () =>{
           }catch(e){
             console.log("probleme",e)
           }
-  
         }
   
         if(state == 3){
@@ -229,14 +230,14 @@ const Main = () =>{
     }
 
     const handleInputTufInfo = (args:any) =>{
-        console.log(args.target.id,args.target.value)
+        //console.log(args.target.id,args.target.value)
 
         var tufInfo:any = tufterInfo.find(v=>v.name === args.target.id)
         tufInfo.value = args.target.value
 
         setTufterInfo(tufterInfo)
 
-        console.log("voici le touver", tufInfo)
+        //console.log("voici le touver", tufInfo)
     }
 
     const handleClickBtnCheck1 = () =>{
@@ -260,6 +261,16 @@ const Main = () =>{
         console.log(args)
 
     }
+
+    const chartData: any[] = [
+        { x: 'Reparer tapis', y: 10 }, { x: 'Pause', y: 16 },
+        { x: 'balle plancher', y: 30 }, { x: 'échatillion', y: 8 },
+        
+    ];
+    const primaryxAxis: AxisModel = { interval: 1, valueType: 'Category', majorGridLines: { width: 0 }, labelIntersectAction: 'Rotate45', minorGridLines: { width: 0 }, majorTickLines: { width: 0 }, minorTickLines: { width: 0 }, lineStyle: { width: 0 } };
+    const primaryyAxis: AxisModel = { title: 'Frequence', minimum: 0, maximum: 100, interval: 20, lineStyle: { width: 0 }, majorTickLines: { width: 0 }, majorGridLines: { width: 1 }, minorGridLines: { width: 1 }, minorTickLines: { width: 0 } };
+    const tooltipsettings: TooltipSettingsModel = { enable: true, shared: true, format: '${series.name} : <b>${point.y}</b>' };
+
 
     return(
         <div className='mainContainer'>
@@ -300,7 +311,21 @@ const Main = () =>{
                     </CircularGaugeComponent>
 
                     <div className='item2'>
-                        {/* div bidon pour séparer les items */}
+                        
+                        <ChartComponent id='charts'
+                            height='60%'
+                            primaryXAxis={primaryxAxis}
+                            primaryYAxis={primaryyAxis}
+                            tooltip={tooltipsettings}
+                            title="Raison d'arrêts"
+                            legendSettings={{ visible: true, enableHighlight: true }}>
+                            <Inject services={[ColumnSeries, LineSeries, ParetoSeries, Legend, Tooltip, Category, DataLabel, Highlight]} />
+                            <SeriesCollectionDirective>
+                                <SeriesDirective dataSource={chartData} xName='x' yName='y' name='Defect' type='Pareto' width={2} opacity={0.75} columnWidth={0.4} cornerRadius={{ topLeft: Browser.isDevice ? 4 : 6, topRight: Browser.isDevice ? 4 : 6 }} paretoOptions={{ marker: { visible: true, isFilled: true, width: 7, height: 7 }, dashArray: '3,2', width: 2, fill: '#F7523F' }}>
+                                </SeriesDirective>
+                            </SeriesCollectionDirective>
+                            </ChartComponent>
+                        
                     </div>
 
                     <div className='item3'>
@@ -315,6 +340,11 @@ const Main = () =>{
                                 </div>
                             )
                             })}
+                            
+                            <div>
+                            <label style={{marginLeft:"5px"}}>Nombre de mètres produits sur rouleau :</label>
+                            <input style={{marginLeft:"10px", width:"70px"}}/>
+                            </div>
                             <div className='btnItem3'>
                                 <ButtonComponent onClick={handleClickBtnCheck2}>Validez</ButtonComponent>
                             </div>

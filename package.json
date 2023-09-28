@@ -5,6 +5,7 @@
   "dependencies": {
     "@syncfusion/ej2-base": "^21.2.3",
     "@syncfusion/ej2-react-buttons": "^21.2.6",
+    "@syncfusion/ej2-react-charts": "^23.1.38",
     "@syncfusion/ej2-react-circulargauge": "^21.2.3",
     "@syncfusion/ej2-react-dropdowns": "^22.2.5",
     "@syncfusion/ej2-react-navigations": "^21.2.6",

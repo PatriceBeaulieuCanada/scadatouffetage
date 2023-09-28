@@ -247,21 +247,24 @@ span.e-icons {
   /* background-color: blue; */
   height: 30%;
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  display:flex;
+  flex-direction:row;
+  /* justify-content: center; */
   
 }
 
 .grid1Speed{
   margin-right: 0px;
-  flex:none;
+  flex:content;
   height: 275px;
-  width: 275px;
+  width: 22%;
+  /* background-color: #008cff; */
 }
 
 .mainContainer1 .item2{
-  flex:auto;  
+  flex:auto;
+  /* background-color: #ef0a1a; */
+  width: 35%;  
 }
 
 .mainContainer1 .item3{
@@ -269,10 +272,12 @@ span.e-icons {
   padding-right: 20px;  
   border: 2px solid black;
   border-radius: 3px;
+  width: 40%;
+  background-color: aqua;
 }
 
 .mainContainer1 .item3 .item{
-  margin: 10px;
+  margin: 5px;
 }
 
 .mainContainer1 .item3 .item label{
