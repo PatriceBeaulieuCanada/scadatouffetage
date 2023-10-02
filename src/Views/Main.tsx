@@ -27,8 +27,16 @@ const Main = () =>{
     const [tufterCheckList2, setTufterCheckList2] = useState([{name:"",value:''}])
     const [tufterAction, setTufterAction] = useState("")
     const[employee,SetEmployee] = useState("")
-    const param = { action: '',stopAction:'',humainstopreason:{},guid:'',comment:'',tuffter:"",actionTuffter:"",employee:""}
+    const param = { action: '',stopAction:'',humainstopreason:{},guid:'',comment:'',tuffter:"",actionTuffter:"",employee:"",tufterInfos:[]}
     const [data, setData] = useState([{Name:"erreur",Value:""}]) 
+    
+    const [Check1isChecked, setCheckedState1] = useState(
+        new Array(tufterCheckList1.length).fill(false)
+      );
+
+    const [Check2isChecked, setCheckedState2] = useState(
+        new Array(tufterCheckList2.length).fill(false)
+      );
 
     useMemo(() =>{
         let name = "tufterName" + "=";
@@ -70,7 +78,7 @@ const Main = () =>{
           var state = socketRead.readyState
         
         if(state == 1){
-          console.log("connecter et fonctionnelle")
+          //console.log("connecter et fonctionnelle")
           try{
           socketRead.send("ready");
         }catch(e)
@@ -170,12 +178,12 @@ const Main = () =>{
         }
         param.action = 'ModifStopReason'
         
-        console.log("serial : ", serialData)
+        //console.log("serial : ", serialData)
 
         param.guid = serialData
         param.comment = commentTxt;
 
-        console.log("param : ", param)
+        //console.log("param : ", param)
         await UseCallApi(param)
     }
 
@@ -223,10 +231,14 @@ const Main = () =>{
     }
 
 
-    const handleClickBtnProd = ()=>{
+    const handleClickBtnProd = async ()=>{
         tufterInfo.map((v,i)=>{
-            console.log("les inputs tufter",v.name,v.value)
+            //console.log("les inputs tufter",v.name,v.value)
             })
+
+        param.action = 'SetTufterInfo'
+        param.tufterInfos = tufterInfo as any;
+        await UseCallApi(param)
     }
 
     const handleInputTufInfo = (args:any) =>{
@@ -243,14 +255,12 @@ const Main = () =>{
     const handleClickBtnCheck1 = () =>{
         tufterCheckList1.map((v,i)=>{
             const checklist= document.getElementById(v.name)
-            console.log(checklist)
+            console.log(v.name)
             })
     }
 
-    const handleCheck1Click = (args:any) =>{
-        console.log(args.target.id,args.target.checked)
-        
-
+    const handleCheck1Click = async (args:any) =>{
+        console.log(args.target.name,args.target.checked)
     }
 
     const handleClickBtnCheck2 = () =>{
@@ -258,9 +268,10 @@ const Main = () =>{
     }
 
     const handleCheck2Click = (args:any) =>{
-        console.log(args)
-
+        console.log(args.target.name,args.target.checked)
     }
+
+    
 
     const chartData: any[] = [
         { x: 'Reparer tapis', y: 10 }, { x: 'Pause', y: 16 },
@@ -334,13 +345,19 @@ const Main = () =>{
                             {tufterCheckList2.map((v,i)=>{
                             return(
                                 <div className='item'>
-                                <label>{v.name}  :</label>
-                                <CheckBoxComponent id={v.name} onClick={handleCheck2Click}/>
+                                <label className='item1'>{v.name}  :</label>
+                                <input
+                                    type="checkbox"
+                                    id={v.name[i]}
+                                    name={v.name}
+                                    value={v.name}
+                                    checked={Check2isChecked[i+1]}
+                                    onChange={handleCheck2Click}
+                                    />
                                 </div>
                             )
-                            })}
-                            
-                            <div>
+                            })}                            
+                            <div>                                
                             <label style={{marginLeft:"5px"}}>Nombre de mètres produits sur rouleau :</label>
                             <input style={{marginLeft:"10px", width:"70px"}}/>
                             </div>
@@ -380,7 +397,14 @@ const Main = () =>{
                                 <div className='item'>
                                     <label className='item1'>{v.name}  :</label>
                                     <div className='checkItem'>
-                                        <CheckBoxComponent id={v.name} onClick={handleCheck1Click}/>
+                                        <input
+                                        type="checkbox"
+                                        id={v.name[i]}
+                                        name={v.name}
+                                        value={v.name}
+                                        checked={Check1isChecked[i+1]}
+                                        onChange={handleCheck1Click}
+                                        />
                                     </div>
                                 </div>
                             )

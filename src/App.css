@@ -277,11 +277,8 @@ span.e-icons {
 }
 
 .mainContainer1 .item3 .item{
+  text-align:left;
   margin: 5px;
-}
-
-.mainContainer1 .item3 .item label{
-  margin-right: 10px;
 }
 
 .mainContainer1 .item3 .lblItem3{

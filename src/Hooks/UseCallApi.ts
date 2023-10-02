@@ -129,6 +129,23 @@ const UseCallApi=async(param:any) =>{
 		}        
     }	
 
+	if(param.action=='SetTufterInfo') {
+
+		const config = { headers: { 'Content-Type': 'application/json' } };
+		//console.log(param)
+		
+		
+
+		//console.log(params)
+        try {
+			axios.post(url+'/api/TufftingStandard/SetTufterInfo',param.tufterInfos)			
+		} catch (err) {
+			// Handle Error Here
+			console.error(err);
+			return [];
+		}        
+    }	
+
 }
 
 export default UseCallApi;
