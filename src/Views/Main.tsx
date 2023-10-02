@@ -225,7 +225,7 @@ const Main = () =>{
 
     const handleClickBtnProd = ()=>{
         tufterInfo.map((v,i)=>{
-            console.log(v.name,v.value)
+            console.log("les inputs tufter",v.name,v.value)
             })
     }
 
@@ -325,7 +325,6 @@ const Main = () =>{
                                 </SeriesDirective>
                             </SeriesCollectionDirective>
                             </ChartComponent>
-                        
                     </div>
 
                     <div className='item3'>
