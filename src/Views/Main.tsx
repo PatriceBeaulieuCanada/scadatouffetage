@@ -238,6 +238,9 @@ const Main = () =>{
 
         param.action = 'SetTufterInfo'
         param.tufterInfos = tufterInfo as any;
+        param.tuffter = tufterName
+        param.employee = employee
+
         await UseCallApi(param)
     }
 

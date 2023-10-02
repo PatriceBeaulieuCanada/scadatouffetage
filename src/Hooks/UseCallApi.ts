@@ -133,12 +133,14 @@ const UseCallApi=async(param:any) =>{
 
 		const config = { headers: { 'Content-Type': 'application/json' } };
 		//console.log(param)
-		
-		
+		const params ={
+			tuffter:param.tuffter,
+			employee:param.employee
+		}
 
 		//console.log(params)
         try {
-			axios.post(url+'/api/TufftingStandard/SetTufterInfo',param.tufterInfos)			
+			axios.post(url+'/api/TufftingStandard/SetTufterInfo?'+querystring.stringify(params),param.tufterInfos)			
 		} catch (err) {
 			// Handle Error Here
 			console.error(err);
