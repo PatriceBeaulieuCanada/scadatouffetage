@@ -393,6 +393,14 @@ span.e-icons {
   /* min-width: 200px; */
   font-size: 16px;
   margin-right: 0px;
+  color :red;
+}
+
+.mainContainer2 .container2Div2 .subDiv .item .item2{
+  /* min-width: 200px; */
+  font-size: 16px;
+  margin-right: 0px;
+  color :blue
 }
 
 .mainContainer2 .container2Div2 .subDiv .item .checkItem{

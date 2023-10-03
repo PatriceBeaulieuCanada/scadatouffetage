@@ -25,6 +25,7 @@ const Main = () =>{
     const [tufterInfo, setTufterInfo] = useState([{name:"",value:''}])
     const [tufterCheckList1, setTufterCheckList1] = useState([{name:"",value:''}])
     const [tufterCheckList2, setTufterCheckList2] = useState([{name:"",value:''}])
+    const [tufterCheckList3, setTufterCheckList3] = useState([{name:"",value:''}])
     const [tufterAction, setTufterAction] = useState("")
     const[employee,SetEmployee] = useState("")
     const param = { action: '',stopAction:'',humainstopreason:{},guid:'',comment:'',tuffter:"",actionTuffter:"",employee:"",tufterInfos:[]}
@@ -36,6 +37,10 @@ const Main = () =>{
 
     const [Check2isChecked, setCheckedState2] = useState(
         new Array(tufterCheckList2.length).fill(false)
+      );
+
+    const [Check3isChecked, setCheckedState3] = useState(
+        new Array(tufterCheckList3.length).fill(false)
       );
 
     useMemo(() =>{
@@ -70,6 +75,7 @@ const Main = () =>{
         UseCallApi({action:'GetInfoTuffting'}).then((tufterInfo)=>setTufterInfo(tufterInfo))
         UseCallApi({action:'GetTufterCheckList1'}).then((tufterCheckList1)=>setTufterCheckList1(tufterCheckList1))
         UseCallApi({action:'GetTufterCheckList2'}).then((tufterCheckList2)=>setTufterCheckList2(tufterCheckList2))
+        UseCallApi({action:'GetTufterCheckList3'}).then((tufterCheckList3)=>setTufterCheckList3(tufterCheckList3))
       },[])
 
       useEffect(() => {
@@ -232,10 +238,7 @@ const Main = () =>{
 
 
     const handleClickBtnProd = async ()=>{
-        tufterInfo.map((v,i)=>{
-            //console.log("les inputs tufter",v.name,v.value)
-            })
-
+        
         param.action = 'SetTufterInfo'
         param.tufterInfos = tufterInfo as any;
         param.tuffter = tufterName
@@ -274,7 +277,9 @@ const Main = () =>{
         console.log(args.target.name,args.target.checked)
     }
 
-    
+    const handleCheck3Click = (args:any) =>{
+        console.log(args.target.name,args.target.checked)
+    }
 
     const chartData: any[] = [
         { x: 'Reparer tapis', y: 10 }, { x: 'Pause', y: 16 },
@@ -384,7 +389,7 @@ const Main = () =>{
                         return(
                             <div className='item'>
                             <label>{v.name}  :</label>
-                            <input id={v.name} value={v.value} onBlur={handleInputTufInfo}/>
+                            <input id={v.name} onBlur={handleInputTufInfo}/>
                             </div>
                         )
                         })}
@@ -412,6 +417,25 @@ const Main = () =>{
                                 </div>
                             )
                             })}
+
+                            {tufterCheckList3.map((v,i)=>{
+                            return(
+                                <div className='item'>
+                                    <label className='item2'>{v.name}  :</label>
+                                    <div className='checkItem'>
+                                        <input
+                                        type="checkbox"
+                                        id={v.name[i]}
+                                        name={v.name}
+                                        value={v.name}
+                                        checked={Check3isChecked[i+1]}
+                                        onChange={handleCheck3Click}
+                                        />
+                                    </div>
+                                </div>
+                            )
+                            })}
+
                     <div className='container2Div3'>
                         <ButtonComponent onClick={handleClickBtnCheck1}>Validez</ButtonComponent>                            
                     </div>

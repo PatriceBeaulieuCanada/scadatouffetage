@@ -55,8 +55,7 @@ const UseCallApi=async(param:any) =>{
 	if(param.action=='GetTufterCheckList1') {
 
 		const params = {
-			idStart:1,
-			idStop:12
+			moment:1			
 		}
 
         try {
@@ -72,13 +71,28 @@ const UseCallApi=async(param:any) =>{
 	if(param.action=='GetTufterCheckList2') {
 
 		const params = {
-			idStart:13,
-			idStop:20
+			moment:2
 		}
 
         try {
 			const listTufterCheckList2 = await axios.get(url+'/api/TufftingStandard/GetCheckTuffting?'+querystring.stringify(params));		
 			return listTufterCheckList2.data;
+		} catch (err) {
+			// Handle Error Here
+			console.error(err);
+			return [];
+		}        
+    }
+
+	if(param.action=='GetTufterCheckList3') {
+
+		const params = {
+			moment:3
+		}
+
+        try {
+			const listTufterCheckList3 = await axios.get(url+'/api/TufftingStandard/GetCheckTuffting?'+querystring.stringify(params));		
+			return listTufterCheckList3.data;
 		} catch (err) {
 			// Handle Error Here
 			console.error(err);
