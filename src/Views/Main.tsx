@@ -28,7 +28,8 @@ const Main = () =>{
     const [tufterCheckList3, setTufterCheckList3] = useState([{name:"",value:''}])
     const [tufterAction, setTufterAction] = useState("")
     const[employee,SetEmployee] = useState("")
-    const param = { action: '',stopAction:'',humainstopreason:{},guid:'',comment:'',tuffter:"",actionTuffter:"",employee:"",tufterInfos:[]}
+    const param = { action: '',stopAction:'',humainstopreason:{},guid:'',comment:'',tuffter:"",actionTuffter:"",employee:""
+                    ,tufterInfos:[],tufterCheckList:[]}
     const [data, setData] = useState([{Name:"erreur",Value:""}]) 
     
     const [Check1isChecked, setCheckedState1] = useState(
@@ -248,37 +249,61 @@ const Main = () =>{
     }
 
     const handleInputTufInfo = (args:any) =>{
-        //console.log(args.target.id,args.target.value)
-
         var tufInfo:any = tufterInfo.find(v=>v.name === args.target.id)
         tufInfo.value = args.target.value
-
         setTufterInfo(tufterInfo)
-
-        //console.log("voici le touver", tufInfo)
     }
 
-    const handleClickBtnCheck1 = () =>{
-        tufterCheckList1.map((v,i)=>{
-            const checklist= document.getElementById(v.name)
-            console.log(v.name)
-            })
+    const handleClickBtnCheck1 = async () =>{
+        param.action = 'SetTufterCheckList'
+        param.tufterCheckList = tufterCheckList1 as any;
+        param.tuffter = tufterName
+        param.employee = employee
+    
+        await UseCallApi(param)
+
+        param.action = 'SetTufterCheckList'
+        param.tufterCheckList = tufterCheckList3 as any;
+        param.tuffter = tufterName
+        param.employee = employee
+    
+        await UseCallApi(param)
     }
 
     const handleCheck1Click = async (args:any) =>{
-        console.log(args.target.name,args.target.checked)
+
+       var tufCheckList1:any = tufterCheckList1.find(v=>v.name === args.target.name)
+        
+        if(tufCheckList1!=null){
+            tufCheckList1.value = args.target.checked
+        }
+        
     }
 
-    const handleClickBtnCheck2 = () =>{
-
+    const handleClickBtnCheck2 = async () =>{
+        
+        param.action = 'SetTufterCheckList'
+        param.tufterCheckList = tufterCheckList2 as any;
+        param.tuffter = tufterName
+        param.employee = employee
+    
+        await UseCallApi(param)
     }
 
     const handleCheck2Click = (args:any) =>{
-        console.log(args.target.name,args.target.checked)
+        var tufCheckList2:any = tufterCheckList2.find(v=>v.name === args.target.name)
+        
+        if(tufCheckList2!=null){
+            tufCheckList2.value = args.target.checked
+        }
     }
 
     const handleCheck3Click = (args:any) =>{
-        console.log(args.target.name,args.target.checked)
+        var tufCheckList3:any = tufterCheckList3.find(v=>v.name === args.target.name)
+        
+        if(tufCheckList3!=null){
+            tufCheckList3.value = args.target.checked
+        }
     }
 
     const chartData: any[] = [

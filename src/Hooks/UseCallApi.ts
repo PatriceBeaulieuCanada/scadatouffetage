@@ -162,6 +162,25 @@ const UseCallApi=async(param:any) =>{
 		}        
     }	
 
+	if(param.action=='SetTufterCheckList') {
+
+		const config = { headers: { 'Content-Type': 'application/json' } };
+		//console.log(param)
+		const params ={
+			tuffter:param.tuffter,
+			employee:param.employee
+		}
+
+		//console.log(params)
+        try {
+			axios.post(url+'/api/TufftingStandard/SetTufterCheckBox?'+querystring.stringify(params),param.tufterCheckList)			
+		} catch (err) {
+			// Handle Error Here
+			console.error(err);
+			return [];
+		}        
+    }	
+
 }
 
 export default UseCallApi;
