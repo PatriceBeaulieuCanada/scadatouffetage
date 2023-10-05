@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 const querystring = require('querystring');
 
-const url = 'https://localhost:7091'
-//const url = 'http://129.11.85.2:5005'
+//const url = 'https://localhost:7091'
+const url = 'http://129.11.85.2:5005'
 
 
 const UseCallApi=async(param:any) =>{
@@ -176,6 +176,27 @@ const UseCallApi=async(param:any) =>{
         try {
 			const checkList = await axios.post(url+'/api/TufftingStandard/SetTufterCheckBox?'+querystring.stringify(params),param.tufterCheckList)
 			return checkList.data;			
+		} catch (err) {
+			// Handle Error Here
+			console.error(err);
+			return [];
+		}        
+    }	
+
+	if(param.action=='AddTuffterAction') {
+
+		const config = { headers: { 'Content-Type': 'application/json' } };
+		//console.log(param)
+		const params ={
+			tuffter:param.tuffter,
+			employee:param.employee,
+			action:param.stopAction
+		}
+
+		//console.log(params)
+        try {
+			await axios.post(url+'/api/StopReason/AddTuffterAction?'+querystring.stringify(params))
+						
 		} catch (err) {
 			// Handle Error Here
 			console.error(err);
