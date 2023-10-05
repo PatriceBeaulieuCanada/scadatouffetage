@@ -1,6 +1,6 @@
 import { CircularGaugeComponent, AxesDirective, AxisDirective,RangesDirective, RangeDirective, 
     Annotations, AnnotationsDirective, AnnotationDirective,Inject} from '@syncfusion/ej2-react-circulargauge';
-import { useState,useMemo,useEffect} from 'react'
+import { useState,useMemo,useEffect,useRef} from 'react'
 import { ButtonComponent, CheckBoxComponent } from '@syncfusion/ej2-react-buttons';
 import { Display } from "react-7-segment-display";
 import UseCallApi from '../Hooks/UseCallApi';
@@ -22,27 +22,15 @@ const Main = () =>{
     const [commentTxt,setCommentTxt] = useState('')
     const [serialData,getSerialData] = useState("")
     const [tufterName, setTufterName] = useState('')
-    const [tufterInfo, setTufterInfo] = useState([{name:"",value:''}])
-    const [tufterCheckList1, setTufterCheckList1] = useState([{name:"",value:''}])
-    const [tufterCheckList2, setTufterCheckList2] = useState([{name:"",value:''}])
-    const [tufterCheckList3, setTufterCheckList3] = useState([{name:"",value:''}])
+    const [tufterInfo, setTufterInfo] = useState([{name:"",value:''},{name:"",value:''},{name:"",value:''},{name:"",value:''}])
+    const [tufterCheckList1, setTufterCheckList1] = useState([{name:"",value:false}])
+    const [tufterCheckList2, setTufterCheckList2] = useState([{name:"",value:false}])
+    const [tufterCheckList3, setTufterCheckList3] = useState([{name:"",value:false}])
     const [tufterAction, setTufterAction] = useState("")
     const[employee,SetEmployee] = useState("")
     const param = { action: '',stopAction:'',humainstopreason:{},guid:'',comment:'',tuffter:"",actionTuffter:"",employee:""
                     ,tufterInfos:[],tufterCheckList:[]}
-    const [data, setData] = useState([{Name:"erreur",Value:""}]) 
-    
-    const [Check1isChecked, setCheckedState1] = useState(
-        new Array(tufterCheckList1.length).fill(false)
-      );
-
-    const [Check2isChecked, setCheckedState2] = useState(
-        new Array(tufterCheckList2.length).fill(false)
-      );
-
-    const [Check3isChecked, setCheckedState3] = useState(
-        new Array(tufterCheckList3.length).fill(false)
-      );
+    const [data, setData] = useState([{Name:"erreur",Value:""}])
 
     useMemo(() =>{
         let name = "tufterName" + "=";
@@ -79,40 +67,40 @@ const Main = () =>{
         UseCallApi({action:'GetTufterCheckList3'}).then((tufterCheckList3)=>setTufterCheckList3(tufterCheckList3))
       },[])
 
-      useEffect(() => {
-        const interval = setInterval(() => {
+    //   useEffect(() => {
+    //     const interval = setInterval(() => {
   
-          var state = socketRead.readyState
+    //       var state = socketRead.readyState
         
-        if(state == 1){
-          //console.log("connecter et fonctionnelle")
-          try{
-          socketRead.send("ready");
-        }catch(e)
-        {
-          console.log("erreur",e)
-        }
+    //     if(state == 1){
+    //       //console.log("connecter et fonctionnelle")
+    //       try{
+    //       socketRead.send("ready");
+    //     }catch(e)
+    //     {
+    //       console.log("erreur",e)
+    //     }
   
-        try{
-            socketRead.onmessage = function(e){
-            setData(JSON.parse(e.data.toString()))}
-          }catch(e){
-            console.log("probleme",e)
-          }
-        }
+    //     try{
+    //         socketRead.onmessage = function(e){
+    //         setData(JSON.parse(e.data.toString()))}
+    //       }catch(e){
+    //         console.log("probleme",e)
+    //       }
+    //     }
   
-        if(state == 3){
-          //console.log("non connecter ou en erreur",state)
-          socketRead = new W3CWebSocket('ws://localhost:1796/GetVariables')
-        }
+    //     if(state == 3){
+    //       //console.log("non connecter ou en erreur",state)
+    //       socketRead = new W3CWebSocket('ws://localhost:1796/GetVariables')
+    //     }
   
-        if(state == 0){
-          //console.log("esaie de connection",state)
-        }
+    //     if(state == 0){
+    //       //console.log("esaie de connection",state)
+    //     }
   
-        }, 6000000);
-        return () => clearInterval(interval);
-    }, []); 
+    //     }, 6000000);
+    //     return () => clearInterval(interval);
+    // }, []); 
     
     const handleClickAction = async(args:any)=>{
         const actions = args.target.textContent
@@ -239,19 +227,26 @@ const Main = () =>{
 
 
     const handleClickBtnProd = async ()=>{
-        
         param.action = 'SetTufterInfo'
         param.tufterInfos = tufterInfo as any;
         param.tuffter = tufterName
         param.employee = employee
-
-        await UseCallApi(param)
+        
+        setTufterInfo(await UseCallApi(param))
     }
 
-    const handleInputTufInfo = (args:any) =>{
-        var tufInfo:any = tufterInfo.find(v=>v.name === args.target.id)
-        tufInfo.value = args.target.value
-        setTufterInfo(tufterInfo)
+    const handleInputTufChange = (args:any) =>{
+        const setTuff:any=[]
+
+        tufterInfo.map((v,i)=>{
+            if(v.name === args.target.id){
+                v.value = args.target.value
+                setTufterInfo(tufterInfo)                
+            }
+            setTuff.push(v)           
+        })
+
+        setTufterInfo(setTuff as any)
     }
 
     const handleClickBtnCheck1 = async () =>{
@@ -267,7 +262,7 @@ const Main = () =>{
         param.tuffter = tufterName
         param.employee = employee
     
-        await UseCallApi(param)
+        setTufterCheckList3(await UseCallApi(param))
     }
 
     const handleCheck1Click = async (args:any) =>{
@@ -287,15 +282,22 @@ const Main = () =>{
         param.tuffter = tufterName
         param.employee = employee
     
-        await UseCallApi(param)
+        setTufterCheckList2(await UseCallApi(param))
     }
 
     const handleCheck2Click = (args:any) =>{
+        
         var tufCheckList2:any = tufterCheckList2.find(v=>v.name === args.target.name)
         
+        console.log(args)
+
         if(tufCheckList2!=null){
             tufCheckList2.value = args.target.checked
+            setTufterCheckList1(tufterCheckList2)
         }
+
+        
+
     }
 
     const handleCheck3Click = (args:any) =>{
@@ -381,10 +383,10 @@ const Main = () =>{
                                 <label className='item1'>{v.name}  :</label>
                                 <input
                                     type="checkbox"
-                                    id={v.name[i]}
+                                    id={v.name}
                                     name={v.name}
                                     value={v.name}
-                                    checked={Check2isChecked[i+1]}
+                                    checked={v.value}
                                     onChange={handleCheck2Click}
                                     />
                                 </div>
@@ -398,7 +400,6 @@ const Main = () =>{
                                 <ButtonComponent onClick={handleClickBtnCheck2}>Validez</ButtonComponent>
                             </div>
                     </div>
-                
                     {/* <div className='item3'>
                         <label style={{fontSize:'25px', textDecoration:'underline', margin:'5px 0px'}}>Compteur (Mètres)</label>
                         <Display value="789" count={3} color='red' backgroundColor='black' height={75} skew={false}/>
@@ -414,7 +415,8 @@ const Main = () =>{
                         return(
                             <div className='item'>
                             <label>{v.name}  :</label>
-                            <input id={v.name} onBlur={handleInputTufInfo}/>
+                            <input id={v.name} onChange={handleInputTufChange} value={v.value}
+                            type='text'/>
                             </div>
                         )
                         })}
@@ -432,10 +434,10 @@ const Main = () =>{
                                     <div className='checkItem'>
                                         <input
                                         type="checkbox"
-                                        id={v.name[i]}
+                                        id={v.name}
                                         name={v.name}
                                         value={v.name}
-                                        checked={Check1isChecked[i+1]}
+                                        checked={v.value}
                                         onChange={handleCheck1Click}
                                         />
                                     </div>
@@ -450,10 +452,10 @@ const Main = () =>{
                                     <div className='checkItem'>
                                         <input
                                         type="checkbox"
-                                        id={v.name[i]}
+                                        id={v.name}
                                         name={v.name}
                                         value={v.name}
-                                        checked={Check3isChecked[i+1]}
+                                        checked={v.value}
                                         onChange={handleCheck3Click}
                                         />
                                     </div>
