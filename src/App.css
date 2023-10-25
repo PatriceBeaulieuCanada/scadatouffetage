@@ -245,7 +245,7 @@ span.e-icons {
 
 .mainContainer .mainContainer1{
   /* background-color: blue; */
-  height: 30%;
+  height: 33%;
   width: 100%;
   display:flex;
   flex-direction:row;
@@ -309,7 +309,7 @@ span.e-icons {
 .mainContainer .mainContainer2{
   background-color: #f3eeee;
   border-radius: 5px;
-  height: 25%;
+  height: 27%;
   width: 100%;  
   display: flex;
   flex-direction:row;
@@ -404,7 +404,7 @@ span.e-icons {
   /* min-width: 200px; */
   font-size: 18px;
   margin-right: 12px;
-  margin-top: 3px;
+  margin-top: 4px;
   color :red;
 }
 
@@ -412,13 +412,19 @@ span.e-icons {
   /* min-width: 200px; */
   font-size: 18px;
   margin-right: 12px;
-  margin-top: 3px;
+  margin-top: 4px;
   color :blue
 }
 
 .mainContainer2 .container2Div2 .subDiv .item .checkItem{
   height: 20px;
   
+}
+
+.mainContainer .mainContainer2 .container2Div2 .item3{
+  margin-top: 2px;
+  margin-bottom: 1px;
+  text-align: start;
 }
 
 .mainContainer2 .container2Div3{
@@ -430,7 +436,7 @@ span.e-icons {
 
 .mainContainer .mainContainer3{
   /* background-color: orange; */
-  height: 40%;
+  height: 35%;
   width: 100%;
   border: 2px solid black;
   border-radius: 5px;
@@ -451,6 +457,16 @@ span.e-icons {
   padding: 10px;
   border: 2px solid black;
   border-radius: 5px;
+}
+
+.mainContainer3 .btnActionCSS{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.mainContainer3 .btnActionCSS p{
+  margin-right: 20px;
 }
 
 .containerBtnStop{

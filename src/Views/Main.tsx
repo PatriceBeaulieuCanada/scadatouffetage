@@ -201,9 +201,9 @@ const Main = () => {
       }
     }
 
-    // param.action = 'GetHumainStopReason'
-    // param.stopAction = actions
-    // setDataButton(await UseCallApi(param))
+    param.action = 'GetHumainStopReason'
+    param.stopAction = actions
+    setDataButton(await UseCallApi(param))
 
     // param.action = 'AddTuffterAction'
     // param.stopAction = actions
@@ -493,7 +493,7 @@ const Main = () => {
           v.value = "X";
         }
 
-        setTufterCheckList3(tufterCheckList2);
+        setTufterCheckList3(tufterCheckList3);
       }
       setTuffCheck3.push(v);
     });
@@ -647,11 +647,6 @@ const Main = () => {
               Validez
             </ButtonComponent>
           </div>
-          <div>
-            <ButtonComponent onClick={handleClickBtnTest}>
-              {titleValue}
-            </ButtonComponent>
-          </div>
         </div>
         {/* <div className='item3'>
                         <label style={{fontSize:'25px', textDecoration:'underline', margin:'5px 0px'}}>Compteur (Mètres)</label>
@@ -690,6 +685,12 @@ const Main = () => {
         </div>
         <div className="container2Div2">
           <div className="subDiv">
+          <div className="item3">
+            <label>
+              Nombre de mètres produits sur rouleau :
+            </label>
+            <input style={{ marginLeft: "10px", width: "70px" }} />
+          </div>
             {tufterCheckList1.map((v, i) => {
               return (
                 <div className="item">
@@ -751,10 +752,11 @@ const Main = () => {
       </div>
 
       <div className="mainContainer3">
-        <div>
+        {/* <div>
           <p>Action</p>
-        </div>
-        <div>
+        </div> */}
+        <div className="btnActionCSS">
+        <p>Action : </p>
           <ButtonComponent
             id="btnProd"
             className="grid2Btn"
