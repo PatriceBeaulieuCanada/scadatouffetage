@@ -1,14 +1,14 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 const querystring = require('querystring');
 
-//const url = 'https://localhost:7091'
-const url = 'http://129.11.85.2:5005'
+const url = 'https://localhost:7091'
+//const url = 'http://129.11.85.2:5005'
 
 
 const UseCallApi=async(param:any) =>{
 
 
-    if(param.action=='GetHumainStopReason') {
+    if(param.action==='GetHumainStopReason') {
 
         const params ={
 			stopAction : param.stopAction
@@ -24,12 +24,8 @@ const UseCallApi=async(param:any) =>{
 		}        
     }
 
-	if(param.action=='GetAllMachine') {
-
-        const params ={
-			stopAction : param.stopAction
-		}
-
+	if(param.action==='GetAllMachine') {
+        
         try {
 			const listMachines = await axios.get(url+'/api/Machine/GetAllMachine');		
 			return listMachines.data;
@@ -40,7 +36,7 @@ const UseCallApi=async(param:any) =>{
 		}        
     }
 
-	if(param.action=='GetInfoTuffting') {
+	if(param.action==='GetInfoTuffting') {
 
         try {
 			const listInfoTufter = await axios.get(url+'/api/TufftingStandard/GetInfoTuffting');		
@@ -52,7 +48,7 @@ const UseCallApi=async(param:any) =>{
 		}        
     }
 
-	if(param.action=='GetTufterCheckList1') {
+	if(param.action==='GetTufterCheckList1') {
 
 		const params = {
 			moment:1			
@@ -68,7 +64,7 @@ const UseCallApi=async(param:any) =>{
 		}        
     }
 
-	if(param.action=='GetTufterCheckList2') {
+	if(param.action==='GetTufterCheckList2') {
 
 		const params = {
 			moment:2
@@ -84,7 +80,7 @@ const UseCallApi=async(param:any) =>{
 		}        
     }
 
-	if(param.action=='GetTufterCheckList3') {
+	if(param.action==='GetTufterCheckList3') {
 
 		const params = {
 			moment:3
@@ -100,10 +96,7 @@ const UseCallApi=async(param:any) =>{
 		}        
     }
 
-	if(param.action=='AddStopReason') {
-
-		const config = { headers: { 'Content-Type': 'application/json' } };
-		
+	if(param.action==='AddStopReason') {
 		
 		const params ={
 			id : param.humainstopreason.id,
@@ -123,9 +116,8 @@ const UseCallApi=async(param:any) =>{
 		}        
     }
 
-	if(param.action=='ModifStopReason') {
-
-		const config = { headers: { 'Content-Type': 'application/json' } };
+	if(param.action==='ModifStopReason') {
+		
 		//console.log(param)
 		
 		const params ={
@@ -143,9 +135,8 @@ const UseCallApi=async(param:any) =>{
 		}        
     }	
 
-	if(param.action=='SetTufterInfo') {
+	if(param.action==='SetTufterInfo') {
 
-		const config = { headers: { 'Content-Type': 'application/json' } };
 		//console.log(param)
 		const params ={
 			tuffter:param.tuffter,
@@ -163,9 +154,8 @@ const UseCallApi=async(param:any) =>{
 		}        
     }	
 
-	if(param.action=='SetTufterCheckList') {
+	if(param.action==='SetTufterCheckList') {
 
-		const config = { headers: { 'Content-Type': 'application/json' } };
 		//console.log(param)
 		const params ={
 			tuffter:param.tuffter,
@@ -183,9 +173,8 @@ const UseCallApi=async(param:any) =>{
 		}        
     }	
 
-	if(param.action=='AddTuffterAction') {
+	if(param.action==='AddTuffterAction') {
 
-		const config = { headers: { 'Content-Type': 'application/json' } };
 		//console.log(param)
 		const params ={
 			tuffter:param.tuffter,

@@ -31,7 +31,7 @@ const PopUp = (props:any) =>{
                     <input id='lblInput' className="popupInp" type="text" onChange={handleCommentLabel}/>
                 </div>                
                 <div>
-                    <ButtonComponent className="popupBtn" onClick={handleCloseClick}>Enregistrer</ButtonComponent>
+                    <ButtonComponent className="popupBtn" onClick={handleCloseClick}>Raison d'arrêt terminé</ButtonComponent>
                 </div>
                 
                 {props.children}   
