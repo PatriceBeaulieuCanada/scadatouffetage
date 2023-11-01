@@ -39,6 +39,8 @@ const Main = () => {
   const [textPopup, setTextPopup] = useState("");
   const [commentTxt, setCommentTxt] = useState("");
   const [serialData, getSerialData] = useState("");
+  const [nbrMetresRlx1,setNbrMtresRlx1] = useState('')
+  const [nbrMetresRlx2,setNbrMtresRlx2] = useState('')
   const [tufterName, setTufterName] = useState("");
   const [tufterInfo, setTufterInfo] = useState([
     { name: "", value: "" },
@@ -67,6 +69,7 @@ const Main = () => {
     employee: "",
     tufterInfos: [],
     tufterCheckList: [],
+    nbrMtresRlx:''
   };
   
 
@@ -339,9 +342,10 @@ const Main = () => {
     param.tufterCheckList = tufterCheckList2 as any;
     param.tuffter = tufterName;
     param.employee = tufterName;
+    param.nbrMtresRlx = nbrMetresRlx1;
 
-    //setTufterCheckList2(await UseCallApi(param));
-    
+    setTufterCheckList2(await UseCallApi(param));
+
   };
 
   const chartData: any[] = [
@@ -447,6 +451,11 @@ const Main = () => {
     });
     setTufterCheckList3(setTuffCheck3);
   };
+
+  const handleChangeInput1 = (args:any) =>{
+    console.log(args.target.value)
+    setNbrMtresRlx1(args.target.value)
+  }
 
   return (
     <div className="mainContainer">
@@ -587,7 +596,7 @@ const Main = () => {
             <label style={{ marginLeft: "5px" }}>
               Nombre de mètres produits sur rouleau :
             </label>
-            <input style={{ marginLeft: "10px", width: "70px" }} />
+            <input style={{ marginLeft: "10px", width: "70px" }} value={nbrMetresRlx1} onChange={handleChangeInput1}/>
           </div>
           <div className="btnItem3">
             <ButtonComponent onClick={handleClickBtnCheck2}>

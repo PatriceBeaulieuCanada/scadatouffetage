@@ -156,9 +156,10 @@ const UseCallApi=async(param:any) =>{
 
 	if(param.action==='SetTufterCheckList') {
 
-		//console.log(param)
+		console.log(param)
 		const params ={
-			tuffter:param.tuffter			
+			tuffter:param.tuffter,
+			nbrMtresRlx:param.nbrMtresRlx			
 		}
 		
         try {
