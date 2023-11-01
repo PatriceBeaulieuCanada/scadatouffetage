@@ -47,13 +47,13 @@ const Main = () => {
     { name: "", value: "" },
   ]);
   const [tufterCheckList1, setTufterCheckList1] = useState([
-    { name: "", value: "" },
+    { name: "", values: "" },
   ]);
   const [tufterCheckList2, setTufterCheckList2] = useState([
-    { name: "", value: "" },
+    { name: "", values: "" },
   ]);
   const [tufterCheckList3, setTufterCheckList3] = useState([
-    { name: "", value: "" },
+    { name: "", values: "" },
   ]);
   const [tufterAction, setTufterAction] = useState("");
   const param = {
@@ -68,7 +68,7 @@ const Main = () => {
     tufterInfos: [],
     tufterCheckList: [],
   };
-  const [titleValue, setTitleValue] = useState("X");
+  
 
   useMemo(() => {
     let name = "tufterName=";
@@ -85,20 +85,6 @@ const Main = () => {
       }
     }
 
-    // let empName = "employeeName=";
-    // let decodedEmpCookie = decodeURIComponent(document.cookie);
-    // let caEmp = decodedEmpCookie.split(';');
-    // for(let i = 0; i <caEmp.length; i++) {
-    //     let c = caEmp[i];
-    //     while (c.charAt(0) === ' ') {
-    //     c = c.substring(1);
-    //     }
-    //     if (c.indexOf(empName) === 0) {
-    //     //console.log(c.substring(name.length, c.length))
-    //     SetEmployee(c.substring(empName.length, c.length))
-    //     }
-    // }
-
     UseCallApi({ action: "GetInfoTuffting" }).then((tufterInfo) =>
       setTufterInfo(tufterInfo)
     );
@@ -111,6 +97,18 @@ const Main = () => {
     UseCallApi({ action: "GetTufterCheckList3" }).then((tufterCheckList3) =>
       setTufterCheckList3(tufterCheckList3)
     );
+    //tufterCheckList1.forEach
+
+    // setTimeout( async () => {
+    //   const setTuffCheck: any = [];
+    //   tufterCheckList1.forEach((v,i)=>{
+    //       v.values = "X"
+    //       setTuffCheck.push(v)
+    //   })
+    //   setTufterCheckList1(setTuffCheck)
+    // }, 2000);
+
+    
   }, []);
 
   //   useEffect(() => {
@@ -336,56 +334,15 @@ const Main = () => {
     setTufterCheckList3(await UseCallApi(param));
   };
 
-  // const handleCheck1Click = async (args: any) => {
-  //   const setTuffCheck: any = [];
-
-  //   tufterCheckList1.forEach((v, i) => {
-  //     if (v.name === args.target.id) {
-  //       v.value = args.target.checked;
-  //       setTufterCheckList1(tufterCheckList1);
-  //     }
-  //     setTuffCheck.push(v);
-  //   });
-
-  //   setTufterCheckList1(setTuffCheck as any);
-  // };
-
   const handleClickBtnCheck2 = async () => {
     param.action = "SetTufterCheckList";
     param.tufterCheckList = tufterCheckList2 as any;
     param.tuffter = tufterName;
     param.employee = tufterName;
 
-    setTufterCheckList2(await UseCallApi(param));
+    //setTufterCheckList2(await UseCallApi(param));
+    
   };
-
-  // const handleCheck2Click = (args: any) => {
-  //   const setTuffCheck: any = [];
-
-  //   tufterCheckList2.forEach((v, i) => {
-  //     if (v.name === args.target.id) {
-  //       v.value = args.target.checked;
-  //       setTufterCheckList2(tufterCheckList2);
-  //     }
-  //     setTuffCheck.push(v);
-  //   });
-
-  //   setTufterCheckList2(setTuffCheck as any);
-  // };
-
-  // const handleCheck3Click = (args: any) => {
-  //   const setTuffCheck: any = [];
-
-  //   tufterCheckList3.forEach((v, i) => {
-  //     if (v.name === args.target.id) {
-  //       v.value = args.target.checked;
-  //       setTufterCheckList3(tufterCheckList3);
-  //     }
-  //     setTuffCheck.push(v);
-  //   });
-
-  //   setTufterCheckList3(setTuffCheck as any);
-  // };
 
   const chartData: any[] = [
     { x: "Reparer tapis", y: 10 },
@@ -420,85 +377,75 @@ const Main = () => {
     format: "${series.name} : <b>${point.y}</b>",
   };
 
-  const handleClickBtnTest = (args: any) => {
-    const setTuffCheck: any = [];
+  const handleClickBtn2 = (args: any) => {
+    const setTuffCheck2: any = [];
 
     tufterCheckList2.forEach((v, i) => {
-      if (v.name === args.target.id) {
-        if (v.value === "X") {
-          setTitleValue("Oui");
-          v.value = "Oui";
-        } else if (v.value === "Oui") {
-          setTitleValue("Non");
-          v.value = "Non";
-        } else if (v.value === "Non") {
-          setTitleValue("X");
-          v.value = "X";
-        } else {
-          setTitleValue("X");
-          v.value = "X";
-        }
+      if (v.name === args.target.id){
 
-        setTufterCheckList2(tufterCheckList2);
-      }
-      setTuffCheck.push(v);
+        if (v.values === "X") {
+        v.values = "OUI";
+      
+    }else if(v.values === "OUI"){
+        v.values = "NON";
+      
+    }else if (v.values === "NON"){
+        v.values = "X";
+    }else{
+        v.values = "X"
+    }
+  } 
+      setTuffCheck2.push(v);
     });
-
-    // setTufterCheckList2(setTuffCheck as any);
+    setTufterCheckList2(setTuffCheck2);
   };
 
   const handleClickBtn1 = (args: any) => {
+
     const setTuffCheck1: any = [];
 
     tufterCheckList1.forEach((v, i) => {
-      if (v.name === args.target.id) {
-        if (v.value === "X") {
-          setTitleValue("Oui");
-          v.value = "Oui";
-        } else if (v.value === "Oui") {
-          setTitleValue("Non");
-          v.value = "Non";
-        } else if (v.value === "Non") {
-          setTitleValue("X");
-          v.value = "X";
-        } else {
-          setTitleValue("X");
-          v.value = "X";
-        }
+      if (v.name === args.target.id){
 
-        setTufterCheckList1(tufterCheckList1);
-      }
+        if (v.values === "X") {
+        v.values = "OUI";
+      
+    }else if(v.values === "OUI"){
+        v.values = "NON";
+      
+    }else if (v.values === "NON"){
+        v.values = "X";
+    }else{
+        v.values = "X"
+    }
+  } 
       setTuffCheck1.push(v);
     });
-
-    // setTufterCheckList2(setTuffCheck as any);
+    setTufterCheckList1(setTuffCheck1);
+    
   };
 
   const handleClickBtn3 = (args: any) => {
     const setTuffCheck3: any = [];
 
     tufterCheckList3.forEach((v, i) => {
-      if (v.name === args.target.id) {
-        if (v.value === "X") {
-          setTitleValue("Oui");
-          v.value = "Oui";
-        } else if (v.value === "Oui") {
-          setTitleValue("Non");
-          v.value = "Non";
-        } else if (v.value === "Non") {
-          setTitleValue("X");
-          v.value = "X";
-        } else {
-          setTitleValue("X");
-          v.value = "X";
-        }
+      if (v.name === args.target.id){
 
-        setTufterCheckList3(tufterCheckList3);
-      }
+        if (v.values === "X") {
+        v.values = "OUI";
+      
+    }else if(v.values === "OUI"){
+        v.values = "NON";
+      
+    }else if (v.values === "NON"){
+        v.values = "X";
+    }else{
+        v.values = "X"
+    }
+  } 
       setTuffCheck3.push(v);
     });
-
-    // setTufterCheckList2(setTuffCheck as any);
+    setTufterCheckList3(setTuffCheck3);
   };
 
   return (
@@ -629,9 +576,9 @@ const Main = () => {
                 <ButtonComponent
                   className="btnChoiceCss"
                   id={v.name}
-                  onClick={handleClickBtnTest}
+                  onClick={handleClickBtn2}
                 >
-                  {v.value}
+                  {v.values}
                 </ButtonComponent>
               </div>
             );
@@ -709,7 +656,7 @@ const Main = () => {
                       id={v.name}
                       onClick={handleClickBtn1}
                     >
-                      {v.value}
+                      {v.values}
                     </ButtonComponent>
                   </div>
                 </div>
@@ -734,7 +681,7 @@ const Main = () => {
                       id={v.name}
                       onClick={handleClickBtn3}
                     >
-                      {v.value}
+                      {v.values}
                     </ButtonComponent>
                   </div>
                 </div>

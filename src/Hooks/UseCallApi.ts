@@ -158,11 +158,9 @@ const UseCallApi=async(param:any) =>{
 
 		//console.log(param)
 		const params ={
-			tuffter:param.tuffter,
-			employee:param.employee
+			tuffter:param.tuffter			
 		}
-
-		//console.log(params)
+		
         try {
 			const checkList = await axios.post(url+'/api/TufftingStandard/SetTufterCheckBox?'+querystring.stringify(params),param.tufterCheckList)
 			return checkList.data;			
