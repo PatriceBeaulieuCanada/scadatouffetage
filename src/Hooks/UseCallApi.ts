@@ -190,7 +190,43 @@ const UseCallApi=async(param:any) =>{
 			console.error(err);
 			return [];
 		}        
-    }	
+	}
+
+	if(param.action==='setCommentOperator') {
+
+		console.log(param)
+		const params ={
+			tuffter:param.tuffter,
+			comment:param.comment
+		}
+
+		//console.log(params)
+        try {
+			await axios.post(url+'/api/Employees/AddOpComment?'+querystring.stringify(params))
+						
+		} catch (err) {
+			// Handle Error Here
+			console.error(err);
+			return [];
+		}        
+    }
+	
+	if(param.action==='getCommentOperator') {
+
+		
+		const params = {
+			tuffter:param.tufName
+		}
+
+        try {
+			const tuffterComment = await axios.get(url+'/api/Employees/getCommentOp?'+querystring.stringify(params));
+			return tuffterComment.data;
+		} catch (err) {
+			// Handle Error Here
+			console.error(err);
+			return [];
+		}        
+    }
 
 }
 

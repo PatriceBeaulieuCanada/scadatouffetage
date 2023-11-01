@@ -33,7 +33,7 @@ import {
 import { Browser } from "@syncfusion/ej2-base";
 
 const Main = () => {
-  const [dataButton, setDataButton] = useState([{ name: "" }]);
+  const [dataButton, setDataButton] = useState([{ name: "",family:{id:0}}]);
   const [enablePopup, setEnablePopup] = useState(false);
   const [enablePopupSetup, setEnablePopupSetup] = useState(false);
   const [textPopup, setTextPopup] = useState("");
@@ -42,6 +42,7 @@ const Main = () => {
   const [nbrMetresRlx1,setNbrMtresRlx1] = useState('0')
   const [nbrMetresRlx2,setNbrMtresRlx2] = useState('0')
   const [tufterName, setTufterName] = useState("");
+  const [commentOp,setCommentOp] = useState('')
   const [tufterInfo, setTufterInfo] = useState([
     { name: "", value: "" },
     { name: "", value: "" },
@@ -74,6 +75,7 @@ const Main = () => {
   
 
   useMemo(() => {
+    let tufName = '';
     let name = "tufterName=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(";");
@@ -85,6 +87,7 @@ const Main = () => {
       if (c.indexOf(name) === 0) {
         //console.log(c.substring(name.length, c.length))
         setTufterName(c.substring(name.length, c.length));
+        tufName = c.substring(name.length, c.length)
       }
     }
 
@@ -100,6 +103,10 @@ const Main = () => {
     UseCallApi({ action: "GetTufterCheckList3" }).then((tufterCheckList3) =>
       setTufterCheckList3(tufterCheckList3)
     );
+
+    setTimeout(()=>{UseCallApi({ action: "getCommentOperator",tufName}).then((commentOp) =>
+      setCommentOp(commentOp))},500)
+    
   }, []);
 
   //   useEffect(() => {
@@ -193,12 +200,7 @@ const Main = () => {
     param.action = 'GetHumainStopReason'
     param.stopAction = actions
     setDataButton(await UseCallApi(param))
-
-    // param.action = 'AddTuffterAction'
-    // param.stopAction = actions
-    // param.tuffter = tufterName
-    // param.employee = tufterName
-    // await UseCallApi(param)
+    //console.log(dataButton)
   };
 
   const handleClickReason = async (args: any) => {
@@ -462,6 +464,25 @@ const Main = () => {
   const handleChangeInput2 = (args:any) =>{
     //console.log(args.target.value)
     setNbrMtresRlx2(args.target.value)
+  }
+
+  const handleTextArea = (args:any)=>{
+    setCommentOp(args.target.value)
+  }
+
+  const handleClickEnrComment = async () =>{
+    param.action = "setCommentOperator";
+    param.tuffter = tufterName;
+    param.comment = commentOp;
+    await UseCallApi(param)
+  }
+
+  const handleClickEraseComment = async() =>{
+    setCommentOp("")
+    param.action = "setCommentOperator";
+    param.tuffter = tufterName;
+    param.comment = ".";
+    await UseCallApi(param)
   }
 
   return (
@@ -755,15 +776,107 @@ const Main = () => {
           >
             Couper set de beams
           </ButtonComponent>
+          <div className="commentContainer">
+            <textarea value={commentOp} onChange={handleTextArea}/>
+            <div>
+              <ButtonComponent className="btnComment" onClick={handleClickEnrComment}>Enregistrer</ButtonComponent>
+              <ButtonComponent className="btnComment" onClick={handleClickEraseComment}>Effacer</ButtonComponent>
+            </div>
+          </div>
         </div>
         <div className="containerBtnStop" id="containerBtn">
-          {dataButton.map((v, i) => {
-            return (
-              <ButtonComponent className="grid2Btn" onClick={handleClickReason}>
-                {v.name}
-              </ButtonComponent>
-            );
-          })}
+          <div className="containerStop">
+            {dataButton.map((v, i) => {
+              if(v.family.id===7){
+                return (
+                  <div>             
+                  <ButtonComponent className="grid2Btn" onClick={handleClickReason}>
+                  {v.name}
+                </ButtonComponent>
+                </div> 
+              )
+              }
+            })}
+          </div>
+          <div className="containerStop">
+            {dataButton.map((v, i) => {
+              if(v.family.id===1){
+                return (
+                  <div>             
+                  <ButtonComponent className="grid2Btn" onClick={handleClickReason}>
+                  {v.name}
+                </ButtonComponent>
+                </div> 
+              )
+              }
+            })}
+          </div>
+          <div className="containerStop">
+            {dataButton.map((v, i) => {
+              if(v.family.id===2){
+                return (
+                  <div>             
+                  <ButtonComponent className="grid2Btn" onClick={handleClickReason}>
+                  {v.name}
+                </ButtonComponent>
+                </div> 
+              )
+              }
+            })}
+          </div>
+          <div className="containerStop">
+            {dataButton.map((v, i) => {
+              if(v.family.id===3){
+                return (
+                  <div>             
+                  <ButtonComponent className="grid2Btn" onClick={handleClickReason}>
+                  {v.name}
+                </ButtonComponent>
+                </div> 
+              )
+              }
+            })}
+          </div>
+          <div className="containerStop">
+            {dataButton.map((v, i) => {
+              if(v.family.id===4){
+                return (
+                  <div>             
+                  <ButtonComponent className="grid2Btn" onClick={handleClickReason}>
+                  {v.name}
+                </ButtonComponent>
+                </div> 
+              )
+              }
+            })}
+          </div>
+          <div className="containerStop">
+            {dataButton.map((v, i) => {
+              if(v.family.id===5){
+                return (
+                  <div>             
+                  <ButtonComponent className="grid2Btn" onClick={handleClickReason}>
+                  {v.name}
+                </ButtonComponent>
+                </div> 
+              )
+              }
+            })}
+          </div>
+          <div className="containerStop">
+            {dataButton.map((v, i) => {
+              if(v.family.id===6){
+                return (
+                  <div>             
+                  <ButtonComponent className="grid2Btn" onClick={handleClickReason}>
+                  {v.name}
+                </ButtonComponent>
+                </div> 
+              )
+              }
+            })}
+          </div>
+          
           <PopUp
             trigger={enablePopup}
             setTrigger={setEnablePopup}

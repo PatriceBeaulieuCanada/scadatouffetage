@@ -470,6 +470,8 @@ span.e-icons {
 }
 
 .containerBtnStop{
+  display: flex;
+  
   background-color: #f3eeee;
   text-align: center;
   border:2px solid black;
@@ -482,6 +484,13 @@ span.e-icons {
   border:2px solid black;
   border-radius: 5px;
   animation: blinkingBackground 3s infinite;
+}
+
+.containerStop{
+  background-color: #f3eeee;
+  text-align: center;
+  border:2px solid black;
+  border-radius: 5px;
 }
 
 @keyframes blinkingBackground{
@@ -503,6 +512,21 @@ span.e-icons {
   white-space:normal;   
 }
 
+.commentContainer{
+  display: flex;
+  flex-direction: column;
+  margin-left: 50px;
+}
+
+.commentContainer textarea{
+  margin-bottom: 5px;
+  width: 450px;
+  height: 35px;
+}
+
+.commentContainer .btnComment{
+  margin-left: 10px;
+}
 
 /***************************************************************Page Popup******************************************************/
 
