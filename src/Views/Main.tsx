@@ -39,8 +39,8 @@ const Main = () => {
   const [textPopup, setTextPopup] = useState("");
   const [commentTxt, setCommentTxt] = useState("");
   const [serialData, getSerialData] = useState("");
-  const [nbrMetresRlx1,setNbrMtresRlx1] = useState('')
-  const [nbrMetresRlx2,setNbrMtresRlx2] = useState('')
+  const [nbrMetresRlx1,setNbrMtresRlx1] = useState('0')
+  const [nbrMetresRlx2,setNbrMtresRlx2] = useState('0')
   const [tufterName, setTufterName] = useState("");
   const [tufterInfo, setTufterInfo] = useState([
     { name: "", value: "" },
@@ -100,18 +100,6 @@ const Main = () => {
     UseCallApi({ action: "GetTufterCheckList3" }).then((tufterCheckList3) =>
       setTufterCheckList3(tufterCheckList3)
     );
-    //tufterCheckList1.forEach
-
-    // setTimeout( async () => {
-    //   const setTuffCheck: any = [];
-    //   tufterCheckList1.forEach((v,i)=>{
-    //       v.values = "X"
-    //       setTuffCheck.push(v)
-    //   })
-    //   setTufterCheckList1(setTuffCheck)
-    // }, 2000);
-
-    
   }, []);
 
   //   useEffect(() => {
@@ -327,14 +315,22 @@ const Main = () => {
     param.tuffter = tufterName;
     param.employee = tufterName;
 
+    if(nbrMetresRlx2===null || nbrMetresRlx2 === ""){
+      param.nbrMtresRlx = "0";
+    }else{
+      param.nbrMtresRlx = nbrMetresRlx2;
+    }
+
     setTufterCheckList1(await UseCallApi(param));
 
     param.action = "SetTufterCheckList";
     param.tufterCheckList = tufterCheckList3 as any;
     param.tuffter = tufterName;
     param.employee = tufterName;
+    param.nbrMtresRlx = "0";
 
     setTufterCheckList3(await UseCallApi(param));
+    setNbrMtresRlx2("0")
   };
 
   const handleClickBtnCheck2 = async () => {
@@ -342,9 +338,15 @@ const Main = () => {
     param.tufterCheckList = tufterCheckList2 as any;
     param.tuffter = tufterName;
     param.employee = tufterName;
-    param.nbrMtresRlx = nbrMetresRlx1;
+    
+    if(nbrMetresRlx1===null || nbrMetresRlx1 === ""){
+      param.nbrMtresRlx = "0";
+    }else{
+      param.nbrMtresRlx = nbrMetresRlx1;
+    }
 
     setTufterCheckList2(await UseCallApi(param));
+    setNbrMtresRlx1("0")
 
   };
 
@@ -453,8 +455,13 @@ const Main = () => {
   };
 
   const handleChangeInput1 = (args:any) =>{
-    console.log(args.target.value)
+    //console.log(args.target.value)
     setNbrMtresRlx1(args.target.value)
+  }
+
+  const handleChangeInput2 = (args:any) =>{
+    //console.log(args.target.value)
+    setNbrMtresRlx2(args.target.value)
   }
 
   return (
@@ -596,7 +603,7 @@ const Main = () => {
             <label style={{ marginLeft: "5px" }}>
               Nombre de mètres produits sur rouleau :
             </label>
-            <input style={{ marginLeft: "10px", width: "70px" }} value={nbrMetresRlx1} onChange={handleChangeInput1}/>
+            <input type="number" style={{ marginLeft: "10px", width: "70px" }} value={nbrMetresRlx1} onChange={handleChangeInput1}/>
           </div>
           <div className="btnItem3">
             <ButtonComponent onClick={handleClickBtnCheck2}>
@@ -624,10 +631,10 @@ const Main = () => {
                 <div className="item">
                   <label>{v.name} :</label>
                   <input
+                    type="number"
                     id={v.name}
                     onChange={handleInputTufChange}
                     value={v.value}
-                    type="text"
                   />
                 </div>
               );
@@ -645,7 +652,7 @@ const Main = () => {
             <label>
               Nombre de mètres produits sur rouleau :
             </label>
-            <input style={{ marginLeft: "10px", width: "70px" }} />
+            <input type="number" style={{ marginLeft: "10px", width: "70px" }} value={nbrMetresRlx2} onChange={handleChangeInput2}/>
           </div>
             {tufterCheckList1.map((v, i) => {
               return (
