@@ -176,8 +176,7 @@ const UseCallApi=async(param:any) =>{
 
 		//console.log(param)
 		const params ={
-			tuffter:param.tuffter,
-			employee:param.employee,
+			tuffter:param.tuffter,			
 			action:param.stopAction
 		}
 

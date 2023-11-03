@@ -201,6 +201,11 @@ const Main = () => {
     param.stopAction = actions
     setDataButton(await UseCallApi(param))
     //console.log(dataButton)
+
+    param.action = 'AddTuffterAction'
+    param.stopAction = actions
+    param.tuffter = tufterName
+    await UseCallApi(param)
   };
 
   const handleClickReason = async (args: any) => {
@@ -786,24 +791,26 @@ const Main = () => {
         </div>
         <div className="containerBtnStop" id="containerBtn">
           <div className="containerStop">
+          
             {dataButton.map((v, i) => {
               if(v.family.id===7){
                 return (
                   <div>             
-                  <ButtonComponent className="grid2Btn" onClick={handleClickReason}>
+                  <ButtonComponent className="grid2Btn" onClick={handleClickReason} style={{backgroundColor:"#1985de"}}>
                   {v.name}
                 </ButtonComponent>
                 </div> 
               )
               }
             })}
+            
           </div>
           <div className="containerStop">
             {dataButton.map((v, i) => {
               if(v.family.id===1){
                 return (
                   <div>             
-                  <ButtonComponent className="grid2Btn" onClick={handleClickReason}>
+                  <ButtonComponent className="grid2Btn" onClick={handleClickReason} style={{backgroundColor:"#1f5e91"}}>
                   {v.name}
                 </ButtonComponent>
                 </div> 
@@ -816,7 +823,7 @@ const Main = () => {
               if(v.family.id===2){
                 return (
                   <div>             
-                  <ButtonComponent className="grid2Btn" onClick={handleClickReason}>
+                  <ButtonComponent className="grid2Btn" onClick={handleClickReason} style={{backgroundColor:"#143651"}}>
                   {v.name}
                 </ButtonComponent>
                 </div> 
@@ -829,7 +836,7 @@ const Main = () => {
               if(v.family.id===3){
                 return (
                   <div>             
-                  <ButtonComponent className="grid2Btn" onClick={handleClickReason}>
+                  <ButtonComponent className="grid2Btn" onClick={handleClickReason} style={{backgroundColor:"#081621"}}>
                   {v.name}
                 </ButtonComponent>
                 </div> 
@@ -842,7 +849,7 @@ const Main = () => {
               if(v.family.id===4){
                 return (
                   <div>             
-                  <ButtonComponent className="grid2Btn" onClick={handleClickReason}>
+                  <ButtonComponent className="grid2Btn" onClick={handleClickReason} style={{backgroundColor:"#5eb2ee"}}>
                   {v.name}
                 </ButtonComponent>
                 </div> 
@@ -855,7 +862,7 @@ const Main = () => {
               if(v.family.id===5){
                 return (
                   <div>             
-                  <ButtonComponent className="grid2Btn" onClick={handleClickReason}>
+                  <ButtonComponent className="grid2Btn" onClick={handleClickReason} style={{backgroundColor:"#556080"}}>
                   {v.name}
                 </ButtonComponent>
                 </div> 
@@ -868,7 +875,7 @@ const Main = () => {
               if(v.family.id===6){
                 return (
                   <div>             
-                  <ButtonComponent className="grid2Btn" onClick={handleClickReason}>
+                  <ButtonComponent className="grid2Btn" onClick={handleClickReason} style={{backgroundColor:"#363942"}}>
                   {v.name}
                 </ButtonComponent>
                 </div> 
