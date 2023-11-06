@@ -1,8 +1,8 @@
 import axios from 'axios';
 const querystring = require('querystring');
 
-const url = 'https://localhost:7091'
-//const url = 'http://129.11.85.2:5005'
+//const url = 'https://localhost:7091'
+const url = 'http://129.11.85.2:5005'
 
 
 const UseCallApi=async(param:any) =>{
